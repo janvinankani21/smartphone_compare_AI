@@ -36,6 +36,21 @@ if (usePostgres) {
 }
 
 if (dbType === 'sqlite') {
+  if (process.env.VERCEL) {
+    const tempDbFile = path.join('/tmp', 'db.sqlite');
+    try {
+      if (!fs.existsSync(tempDbFile)) {
+        console.log(`Vercel environment detected. Copying pre-seeded DB from ${dbFile} to ${tempDbFile}`);
+        fs.copyFileSync(dbFile, tempDbFile);
+      } else {
+        console.log('Database already exists in /tmp');
+      }
+      dbFile = tempDbFile;
+    } catch (err) {
+      console.error('Failed to copy database to /tmp:', err);
+    }
+  }
+
   console.log(`Database Type: SQLite (${dbFile})`);
   sqliteDb = new sqlite3.Database(dbFile);
 }
