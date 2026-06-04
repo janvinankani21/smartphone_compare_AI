@@ -61,6 +61,24 @@ app.get('/api/debug-db', async (req, res) => {
     diagnostics.queryError = err.message;
     diagnostics.queryErrorStack = err.stack;
   }
+
+  try {
+    const searchResult = await db.query(
+      `SELECT p.id, p.model, p.price_inr, p.image_url, b.name as brand_name 
+       FROM phones p
+       JOIN brands b ON p.brand_id = b.id
+       WHERE p.model LIKE $1 OR b.name LIKE $2
+       LIMIT 6`,
+      ['%samsung%', '%samsung%']
+    );
+    diagnostics.searchSuccess = true;
+    diagnostics.searchCount = searchResult.rows.length;
+    diagnostics.searchResults = searchResult.rows;
+  } catch (searchErr) {
+    diagnostics.searchSuccess = false;
+    diagnostics.searchError = searchErr.message;
+    diagnostics.searchErrorStack = searchErr.stack;
+  }
   
   res.json(diagnostics);
 });
