@@ -23,6 +23,34 @@ app.use((req, res, next) => {
   next();
 });
 
+// Database initialization middleware for serverless environments (Vercel)
+let dbInitialized = false;
+let dbPromise = null;
+
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api') && !dbInitialized) {
+    if (!dbPromise) {
+      console.log('Initializing database in middleware...');
+      dbPromise = initializeDatabase()
+        .then(() => {
+          dbInitialized = true;
+          console.log('Database successfully initialized in middleware.');
+        })
+        .catch((err) => {
+          console.error('Database initialization failed in middleware:', err);
+          dbPromise = null;
+          throw err;
+        });
+    }
+    try {
+      await dbPromise;
+    } catch (err) {
+      return res.status(500).json({ error: 'Database initialization failed: ' + err.message });
+    }
+  }
+  next();
+});
+
 // Register Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/phones', phoneRoutes);
@@ -51,6 +79,7 @@ async function startServer() {
   try {
     // Run schema creation and seed logic
     await initializeDatabase();
+    dbInitialized = true;
     
     app.listen(PORT, () => {
       console.log(`================================================`);
