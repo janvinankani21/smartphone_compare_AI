@@ -40,15 +40,20 @@ if (dbType === 'sqlite') {
     const tempDbFile = path.join('/tmp', 'db.sqlite');
     try {
       if (!fs.existsSync(tempDbFile)) {
-        console.log(`Vercel environment detected. Copying pre-seeded DB from ${dbFile} to ${tempDbFile}`);
-        fs.copyFileSync(dbFile, tempDbFile);
+        if (fs.existsSync(dbFile)) {
+          console.log(`Vercel environment detected. Copying pre-seeded DB from ${dbFile} to ${tempDbFile}`);
+          fs.copyFileSync(dbFile, tempDbFile);
+        } else {
+          console.log(`Pre-seeded DB not found at ${dbFile}. A new DB will be created at ${tempDbFile}`);
+        }
       } else {
         console.log('Database already exists in /tmp');
       }
-      dbFile = tempDbFile;
     } catch (err) {
       console.error('Failed to copy database to /tmp:', err);
     }
+    // ALWAYS use the writable temp path on Vercel
+    dbFile = tempDbFile;
   }
 
   console.log(`Database Type: SQLite (${dbFile})`);
