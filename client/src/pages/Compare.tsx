@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { useApp, API_URL } from '../context/AppContext';
 import type { Phone } from '../context/AppContext';
 import { Scale, Trash2, Plus, Sparkles, X, Search } from 'lucide-react';
 import { ScoreGauge } from '../components/ScoreGauge';
@@ -38,7 +38,7 @@ export const Compare: React.FC = () => {
   const fetchComparedPhones = async (ids: number[]) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/phones/compare?ids=${ids.join(',')}`);
+      const res = await fetch(`${API_URL}/phones/compare?ids=${ids.join(',')}`);
       if (res.ok) {
         const data = await res.json();
         setPhones(data.phones);
@@ -64,7 +64,7 @@ export const Compare: React.FC = () => {
         return;
       }
       try {
-        const res = await fetch(`http://localhost:5000/api/phones/search?q=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(`${API_URL}/phones/search?q=${encodeURIComponent(searchQuery)}`);
         if (res.ok) {
           const data = await res.json();
           setSearchSuggestions(data);
@@ -97,7 +97,7 @@ export const Compare: React.FC = () => {
   const handleSelectPhone = async (phoneId: number) => {
     setIsSearchOpen(false);
     try {
-      const res = await fetch(`http://localhost:5000/api/phones/${phoneId}`);
+      const res = await fetch(`${API_URL}/phones/${phoneId}`);
       if (res.ok) {
         const data = await res.json();
         const success = addToCompare(data.phone);

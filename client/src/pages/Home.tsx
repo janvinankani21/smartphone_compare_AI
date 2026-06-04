@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { useApp, API_URL } from '../context/AppContext';
 import type { Phone } from '../context/AppContext';
 import { Scale, Sparkles, ArrowRight, Flame, Eye } from 'lucide-react';
 import { ScoreGauge } from '../components/ScoreGauge';
@@ -14,7 +14,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     const fetchTrending = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/phones/trending');
+        const res = await fetch(`${API_URL}/phones/trending`);
         if (res.ok) {
           const data = await res.json();
           setMostViewed(data.mostViewed);

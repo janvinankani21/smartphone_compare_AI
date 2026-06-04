@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
+import { useApp, API_URL } from '../context/AppContext';
 import { Search, Scale, Heart, Sparkles, User, LogOut, LayoutDashboard, Menu, X } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
         return;
       }
       try {
-        const res = await fetch(`http://localhost:5000/api/phones/search?q=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(`${API_URL}/phones/search?q=${encodeURIComponent(searchQuery)}`);
         if (res.ok) {
           const data = await res.json();
           setSuggestions(data);
