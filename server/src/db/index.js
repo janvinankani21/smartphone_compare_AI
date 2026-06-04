@@ -8,7 +8,7 @@ let dbType = 'sqlite';
 let pgPool = null;
 let sqliteDb = null;
 
-const dbFile = path.resolve(__dirname, '../../db.sqlite');
+let dbFile = path.join(__dirname, '..', '..', 'db.sqlite');
 
 // Check environment variables to determine DB type
 const usePostgres = process.env.DATABASE_URL || 
