@@ -70,17 +70,17 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full glass-panel border-b border-border bg-background/80 backdrop-blur-md px-4 py-3 md:px-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between">
+    <nav className="sticky top-0 z-50 w-full bg-white border-b border-border px-4 py-3 md:px-8 shadow-sm">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-          <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-xl font-extrabold tracking-tight text-transparent font-sans">
-            SMARTPHONE COMPARE<span className="text-white font-light font-mono">.AI</span>
+        <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileMenuOpen(false)}>
+          <span className="text-xl font-extrabold tracking-tight text-foreground font-sans">
+            SMARTPHONE COMPARE<span className="text-secondary font-black">.AI</span>
           </span>
         </Link>
 
         {/* Search Bar - Desktop */}
-        <div ref={searchRef} className="relative hidden w-full max-w-md md:block">
+        <div ref={searchRef} className="relative hidden w-full max-w-xs lg:max-w-md md:block flex-1 mx-4">
           <form onSubmit={handleSearchSubmit}>
             <div className="relative">
               <input
@@ -89,7 +89,7 @@ export const Navbar: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearching(true)}
-                className="w-full rounded-full bg-secondary/60 py-2 pl-10 pr-4 text-sm text-white placeholder-muted-foreground outline-none ring-1 ring-border focus:ring-accent transition-all duration-300"
+                className="w-full rounded-full bg-neutral-50 py-2 pl-10 pr-4 text-xs text-foreground placeholder-muted-foreground outline-none ring-1 ring-border focus:ring-primary focus:bg-white transition-all duration-300"
               />
               <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-muted-foreground" />
             </div>
@@ -97,19 +97,19 @@ export const Navbar: React.FC = () => {
 
           {/* Autocomplete Dropdown */}
           {isSearching && suggestions.length > 0 && (
-            <div className="absolute top-11 z-50 w-full overflow-hidden rounded-xl border border-border bg-card shadow-2xl backdrop-blur-xl">
+            <div className="absolute top-11 z-50 w-full overflow-hidden rounded-xl border border-border bg-white shadow-2xl">
               {suggestions.map((phone) => (
                 <div
                   key={phone.id}
                   onClick={() => handleSuggestionClick(phone.id)}
-                  className="flex cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-muted/80 transition-colors"
+                  className="flex cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-neutral-50 transition-colors"
                 >
                   <img src={phone.image_url} alt={phone.model} className="h-8 w-8 rounded object-cover" />
                   <div className="text-left">
-                    <div className="text-xs font-semibold text-accent">{phone.brand_name}</div>
-                    <div className="text-sm font-medium text-white">{phone.model}</div>
+                    <div className="text-[10px] font-semibold text-secondary">{phone.brand_name}</div>
+                    <div className="text-xs font-medium text-foreground">{phone.model}</div>
                   </div>
-                  <div className="ml-auto text-xs font-mono text-muted-foreground">
+                  <div className="ml-auto text-[10px] font-mono text-muted-foreground">
                     ₹{phone.price_inr.toLocaleString()}
                   </div>
                 </div>
@@ -119,30 +119,28 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Links & Buttons - Desktop */}
-        <div className="hidden items-center gap-6 md:flex">
-          <Link to="/compare" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-white transition-colors">
-            <Scale className="h-4 w-4" />
-            Compare
-            {compareList.length > 0 && (
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-black animate-pulse">
-                {compareList.length}
-              </span>
-            )}
+        <div className="hidden items-center gap-5 md:flex shrink-0">
+          <Link to="/compare" className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            Compare Phones
           </Link>
-          
-          <Link to="/finder" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-white transition-colors">
-            <Sparkles className="h-4 w-4 text-yellow-400" />
+          <Link to="/trending" className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            Best Phones
+          </Link>
+          <Link to="/trending" className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            Brands
+          </Link>
+          <Link to="/finder" className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors">
             Finder
           </Link>
-
-          <Link to="/assistant" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-white transition-colors">
-            <User className="h-4 w-4 text-cyan-400" />
-            AI Chat
+          <Link to="/assistant" className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            Reviews
           </Link>
 
+          <span className="h-4 w-px bg-border"></span>
+
           {/* Wishlist Icon */}
-          <Link to="/wishlist" className="relative text-muted-foreground hover:text-white transition-colors">
-            <Heart className="h-5 w-5" />
+          <Link to="/wishlist" className="relative text-muted-foreground hover:text-foreground transition-colors">
+            <Heart className="h-4.5 w-4.5" />
             {wishlistIds.length > 0 && (
               <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[9px] font-bold text-white">
                 {wishlistIds.length}
@@ -155,28 +153,28 @@ export const Navbar: React.FC = () => {
             <div ref={userDropdownRef} className="relative">
               <button
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                className="flex items-center gap-2 rounded-full bg-secondary/80 p-1 pr-3 text-sm font-medium hover:bg-secondary transition-all"
+                className="flex items-center gap-2 rounded-full bg-neutral-50 border border-border p-1 pr-3 text-xs font-medium hover:bg-neutral-100 transition-all"
               >
                 <img
                   src={user.avatar_url || 'https://api.dicebear.com/7.x/avataaars/svg'}
                   alt={user.full_name}
                   className="h-6 w-6 rounded-full"
                 />
-                <span className="max-w-[80px] truncate text-xs">{user.full_name.split(' ')[0]}</span>
+                <span className="max-w-[80px] truncate text-[11px] text-foreground">{user.full_name.split(' ')[0]}</span>
               </button>
 
               {/* User Dropdown */}
               {userDropdownOpen && (
-                <div className="absolute right-0 top-9 w-48 overflow-hidden rounded-xl border border-border bg-card shadow-2xl">
+                <div className="absolute right-0 top-9 w-48 overflow-hidden rounded-xl border border-border bg-white shadow-2xl z-50">
                   <div className="border-b border-border p-3 text-left">
-                    <p className="text-xs font-semibold text-white truncate">{user.full_name}</p>
+                    <p className="text-xs font-semibold text-foreground truncate">{user.full_name}</p>
                     <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
                   </div>
                   {user.role === 'admin' && (
                     <Link
                       to="/admin"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-white transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-muted-foreground hover:bg-neutral-50 hover:text-foreground transition-colors"
                     >
                       <LayoutDashboard className="h-3.5 w-3.5" />
                       Admin Panel
@@ -185,7 +183,7 @@ export const Navbar: React.FC = () => {
                   <Link
                     to="/wishlist"
                     onClick={() => setUserDropdownOpen(false)}
-                    className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-white transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-muted-foreground hover:bg-neutral-50 hover:text-foreground transition-colors"
                   >
                     <Heart className="h-3.5 w-3.5" />
                     Saved Devices
@@ -195,7 +193,7 @@ export const Navbar: React.FC = () => {
                       setUserDropdownOpen(false);
                       logout();
                     }}
-                    className="flex w-full items-center gap-2 border-t border-border px-4 py-2 text-xs font-medium text-rose-400 hover:bg-muted transition-colors"
+                    className="flex w-full items-center gap-2 border-t border-border px-4 py-2 text-xs font-medium text-rose-500 hover:bg-neutral-50 transition-colors"
                   >
                     <LogOut className="h-3.5 w-3.5" />
                     Logout
@@ -206,7 +204,7 @@ export const Navbar: React.FC = () => {
           ) : (
             <Link
               to="/auth"
-              className="rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-black hover:bg-neutral-200 transition-colors"
+              className="rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-foreground hover:bg-secondary transition-colors"
             >
               Sign In
             </Link>
@@ -215,16 +213,16 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Menu Icon */}
         <div className="flex items-center gap-4 md:hidden">
-          <Link to="/compare" className="relative text-muted-foreground">
+          <Link to="/compare" className="relative text-muted-foreground hover:text-foreground">
             <Scale className="h-5 w-5" />
             {compareList.length > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-accent text-[8px] font-bold text-black">
+              <span className="absolute -right-2 -top-2 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-foreground">
                 {compareList.length}
               </span>
             )}
           </Link>
           
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-white">
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-foreground">
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -232,7 +230,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="mt-4 flex flex-col gap-4 rounded-xl border border-border bg-card p-4 md:hidden animate-fade-in">
+        <div className="mt-4 flex flex-col gap-4 rounded-xl border border-border bg-white p-4 md:hidden animate-fade-in shadow-lg">
           {/* Mobile search */}
           <form onSubmit={handleSearchSubmit}>
             <div className="relative">
@@ -241,7 +239,7 @@ export const Navbar: React.FC = () => {
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-full bg-secondary/80 py-2 pl-10 pr-4 text-sm text-white placeholder-muted-foreground outline-none ring-1 ring-border"
+                className="w-full rounded-full bg-neutral-50 py-2 pl-10 pr-4 text-xs text-foreground placeholder-muted-foreground outline-none ring-1 ring-border focus:ring-primary focus:bg-white"
               />
               <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-muted-foreground" />
             </div>
@@ -250,34 +248,52 @@ export const Navbar: React.FC = () => {
           <Link
             to="/compare"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 py-1 text-sm font-medium text-muted-foreground hover:text-white"
+            className="flex items-center gap-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground"
           >
             <Scale className="h-4 w-4" />
-            Compare Bucket ({compareList.length})
+            Compare Phones ({compareList.length})
+          </Link>
+
+          <Link
+            to="/trending"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground"
+          >
+            <Sparkles className="h-4 w-4 text-secondary" />
+            Best Phones
+          </Link>
+
+          <Link
+            to="/trending"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground"
+          >
+            <Sparkles className="h-4 w-4 text-secondary" />
+            Brands
           </Link>
 
           <Link
             to="/finder"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 py-1 text-sm font-medium text-muted-foreground hover:text-white"
+            className="flex items-center gap-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground"
           >
-            <Sparkles className="h-4 w-4 text-yellow-400" />
-            Best Phone Finder
+            <Sparkles className="h-4 w-4 text-secondary" />
+            Finder
           </Link>
 
           <Link
             to="/assistant"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 py-1 text-sm font-medium text-muted-foreground hover:text-white"
+            className="flex items-center gap-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground"
           >
-            <User className="h-4 w-4 text-cyan-400" />
-            AI Chat Assistant
+            <User className="h-4 w-4 text-secondary" />
+            Reviews
           </Link>
 
           <Link
             to="/wishlist"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 py-1 text-sm font-medium text-muted-foreground hover:text-white"
+            className="flex items-center gap-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground"
           >
             <Heart className="h-4 w-4 text-rose-500" />
             My Wishlist ({wishlistIds.length})
@@ -287,7 +303,7 @@ export const Navbar: React.FC = () => {
             <Link
               to="/admin"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-2 py-1 text-sm font-medium text-muted-foreground hover:text-white"
+              className="flex items-center gap-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground"
             >
               <LayoutDashboard className="h-4 w-4" />
               Admin Panel
@@ -302,14 +318,14 @@ export const Navbar: React.FC = () => {
                   alt={user.full_name}
                   className="h-8 w-8 rounded-full"
                 />
-                <span className="text-sm font-medium text-white">{user.full_name}</span>
+                <span className="text-xs font-medium text-foreground">{user.full_name}</span>
               </div>
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   logout();
                 }}
-                className="flex items-center gap-1.5 text-xs font-semibold text-rose-400"
+                className="flex items-center gap-1.5 text-xs font-semibold text-rose-500"
               >
                 <LogOut className="h-4 w-4" />
                 Logout
@@ -319,7 +335,7 @@ export const Navbar: React.FC = () => {
             <Link
               to="/auth"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 w-full rounded-full bg-white py-2 text-center text-sm font-semibold text-black hover:bg-neutral-200"
+              className="mt-2 w-full rounded-full bg-primary py-2 text-center text-xs font-semibold text-foreground hover:bg-secondary"
             >
               Sign In
             </Link>

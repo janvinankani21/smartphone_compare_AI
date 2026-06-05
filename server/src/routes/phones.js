@@ -106,10 +106,10 @@ router.get('/search', async (req, res) => {
       SELECT p.id, p.model, p.price_inr, p.image_url, b.name as brand_name 
       FROM phones p
       JOIN brands b ON p.brand_id = b.id
-      WHERE p.model LIKE $1 OR b.name LIKE $1
+      WHERE p.model LIKE $1 OR b.name LIKE $2
       LIMIT 6
     `;
-    const result = await query(sql, [`%${q}%`]);
+    const result = await query(sql, [`%${q}%`, `%${q}%`]);
     res.json(result.rows);
   } catch (err) {
     console.error('Search error:', err);

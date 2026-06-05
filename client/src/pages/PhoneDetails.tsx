@@ -141,24 +141,24 @@ export const PhoneDetails: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left">
+    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left bg-background text-foreground">
       {/* Back button */}
-      <Link to="/" className="inline-flex items-center gap-1 text-xs font-bold text-muted-foreground hover:text-white transition-colors mb-6">
+      <Link to="/" className="inline-flex items-center gap-1 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors mb-6">
         <ArrowLeft className="h-4 w-4" /> Back to Dashboard
       </Link>
 
       {/* Main Specs Summary Panel */}
-      <section className="glass-panel grid gap-8 rounded-3xl p-6 md:grid-cols-2 md:p-10">
+      <section className="glass-panel grid gap-8 rounded-3xl p-6 md:grid-cols-2 md:p-10 border border-border bg-white shadow-sm">
         {/* Visual Media Column */}
-        <div className="flex flex-col items-center justify-between rounded-2xl bg-secondary/20 border border-border/50 p-6 relative">
+        <div className="flex flex-col items-center justify-between rounded-2xl bg-neutral-50 border border-border p-6 relative">
           {/* Action buttons on image */}
           <div className="absolute right-4 top-4 flex gap-2">
             <button
               onClick={handleWishlistClick}
               className={`rounded-full p-2.5 transition-colors ${
                 wishlisted
-                  ? 'bg-rose-500/20 text-rose-500 border border-rose-500/40'
-                  : 'bg-secondary/80 text-muted-foreground hover:text-white border border-border/60'
+                  ? 'bg-rose-50 text-rose-500 border border-rose-200'
+                  : 'bg-white text-muted-foreground hover:text-foreground border border-border shadow-sm'
               }`}
             >
               <Heart className="h-4 w-4 fill-current" />
@@ -167,8 +167,8 @@ export const PhoneDetails: React.FC = () => {
               onClick={() => addToCompare(phone)}
               className={`rounded-full p-2.5 transition-colors ${
                 compared
-                  ? 'bg-accent/20 text-accent border border-accent/40'
-                  : 'bg-secondary/80 text-muted-foreground hover:text-white border border-border/60'
+                  ? 'bg-primary/20 text-amber-800 border border-primary/30'
+                  : 'bg-white text-muted-foreground hover:text-foreground border border-border shadow-sm'
               }`}
             >
               <Scale className="h-4 w-4" />
@@ -180,9 +180,9 @@ export const PhoneDetails: React.FC = () => {
           </div>
 
           <div className="w-full text-center">
-            <span className="text-xs font-bold text-accent uppercase tracking-wider">{phone.brand_name}</span>
-            <h1 className="text-2xl font-extrabold text-white mt-1">{phone.model}</h1>
-            <div className="mt-2 text-2xl font-black text-white">₹{phone.price_inr.toLocaleString()}</div>
+            <span className="text-xs font-bold text-secondary uppercase tracking-wider">{phone.brand_name}</span>
+            <h1 className="text-2xl font-extrabold text-foreground mt-1">{phone.model}</h1>
+            <div className="mt-2 text-2xl font-black text-foreground">₹{phone.price_inr.toLocaleString()}</div>
             
             <div className="mt-4 flex flex-wrap justify-center gap-4 text-xs font-semibold text-muted-foreground">
               <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> Launch: {phone.launch_date}</span>
@@ -194,8 +194,8 @@ export const PhoneDetails: React.FC = () => {
         {/* Scores & Quick Overview Details Column */}
         <div className="flex flex-col justify-between">
           <div>
-            <h2 className="text-xs font-bold text-accent uppercase tracking-widest">Hardware Intelligence Summary</h2>
-            <div className="mt-4 grid grid-cols-3 gap-4 rounded-2xl bg-secondary/30 p-4 border border-border/40">
+            <h2 className="text-xs font-bold text-secondary uppercase tracking-widest">Hardware Intelligence Summary</h2>
+            <div className="mt-4 grid grid-cols-3 gap-4 rounded-2xl bg-neutral-50 p-4 border border-border shadow-sm">
               <ScoreGauge score={phone.overall_score} label="Overall Score" size="md" />
               <ScoreGauge score={phone.performance_score} label="Speed Score" size="md" />
               <ScoreGauge score={phone.camera_score} label="Camera Score" size="md" />
@@ -206,11 +206,11 @@ export const PhoneDetails: React.FC = () => {
 
             {/* Pros and Cons */}
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-better/10 bg-better/5 p-4 text-left">
-                <h3 className="flex items-center gap-1 text-xs font-bold text-better uppercase tracking-wider">
+              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-left">
+                <h3 className="flex items-center gap-1 text-xs font-bold text-emerald-800 uppercase tracking-wider">
                   <Check className="h-4 w-4" /> Advantages
                 </h3>
-                <ul className="mt-2 space-y-1.5 text-xs text-neutral-300">
+                <ul className="mt-2 space-y-1.5 text-xs text-neutral-700">
                   {prosList.map((pro, index) => (
                     <li key={index} className="flex items-start gap-1">
                       <span>•</span> <span>{pro}</span>
@@ -219,11 +219,11 @@ export const PhoneDetails: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-worse/10 bg-worse/5 p-4 text-left">
-                <h3 className="flex items-center gap-1 text-xs font-bold text-worse uppercase tracking-wider">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-left">
+                <h3 className="flex items-center gap-1 text-xs font-bold text-red-800 uppercase tracking-wider">
                   <X className="h-4 w-4" /> Disadvantages
                 </h3>
-                <ul className="mt-2 space-y-1.5 text-xs text-neutral-300">
+                <ul className="mt-2 space-y-1.5 text-xs text-neutral-700">
                   {consList.map((con, index) => (
                     <li key={index} className="flex items-start gap-1">
                       <span>•</span> <span>{con}</span>
@@ -236,7 +236,7 @@ export const PhoneDetails: React.FC = () => {
 
           <button
             onClick={() => addToCompare(phone)}
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3 text-sm font-bold text-black hover:bg-neutral-200 transition-colors"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-bold text-foreground hover:bg-secondary transition-colors"
           >
             <Scale className="h-4 w-4" /> Add to Comparison Deck
           </button>
@@ -248,45 +248,45 @@ export const PhoneDetails: React.FC = () => {
         {/* Left Column: Capabilities Breakdown (2/3 width) */}
         <div className="md:col-span-2 space-y-8">
           {/* Detailed capability analysis widgets */}
-          <div className="glass-panel rounded-3xl p-6">
-            <h2 className="mb-6 text-base font-extrabold text-white uppercase tracking-wider">Specific Analyses</h2>
+          <div className="glass-panel rounded-3xl p-6 border border-border bg-white shadow-sm">
+            <h2 className="mb-6 text-base font-extrabold text-foreground uppercase tracking-wider border-b border-border pb-2">Specific Analyses</h2>
             
             <div className="space-y-6">
               {/* Speed Analysis */}
               <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-secondary">
                   <Zap className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">Performance & GPU Profile</h3>
+                  <h3 className="text-sm font-bold text-foreground">Performance & GPU Profile</h3>
                   <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    Powered by the <span className="text-white font-semibold">{phone.processor}</span> processor and <span className="text-white font-semibold">{phone.gpu}</span> graphics unit. Features <span className="text-white font-semibold">{phone.ram_gb}GB</span> high-speed RAM and <span className="text-white font-semibold">{phone.storage_gb}GB</span> storage. The system runs cleanly with no noticeable thermal throttling.
+                    Powered by the <span className="text-foreground font-semibold">{phone.processor}</span> processor and <span className="text-foreground font-semibold">{phone.gpu}</span> graphics unit. Features <span className="text-foreground font-semibold">{phone.ram_gb}GB</span> high-speed RAM and <span className="text-foreground font-semibold">{phone.storage_gb}GB</span> storage. The system runs cleanly with no noticeable thermal throttling.
                   </p>
                 </div>
               </div>
 
               {/* Camera Analysis */}
               <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-500/15 text-purple-400">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
                   <Camera className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">Photography & Optics</h3>
+                  <h3 className="text-sm font-bold text-foreground">Photography & Optics</h3>
                   <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    Optics are driven by a <span className="text-white font-semibold">{phone.rear_camera_spec}</span> sensor configuration. The selfie unit supports <span className="text-white font-semibold">{phone.front_camera_spec}</span> autofocus. Captured images display excellent dynamic range and low-noise processing in twilight settings.
+                    Optics are driven by a <span className="text-foreground font-semibold">{phone.rear_camera_spec}</span> sensor configuration. The selfie unit supports <span className="text-foreground font-semibold">{phone.front_camera_spec}</span> autofocus. Captured images display excellent dynamic range and low-noise processing in twilight settings.
                   </p>
                 </div>
               </div>
 
               {/* Gaming Index */}
               <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Gamepad className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">Gaming Capability</h3>
+                  <h3 className="text-sm font-bold text-foreground">Gaming Capability</h3>
                   <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                    A gaming score of <span className="text-white font-semibold">{phone.gaming_score}/100</span>. The <span className="text-white font-semibold">{phone.refresh_rate}Hz {phone.display_type}</span> screen facilitates lag-free 90 FPS rendering on popular graphic-heavy titles like Call of Duty Mobile.
+                    A gaming score of <span className="text-foreground font-semibold">{phone.gaming_score}/100</span>. The <span className="text-foreground font-semibold">{phone.refresh_rate}Hz {phone.display_type}</span> screen facilitates lag-free 90 FPS rendering on popular graphic-heavy titles like Call of Duty Mobile.
                   </p>
                 </div>
               </div>
@@ -294,53 +294,53 @@ export const PhoneDetails: React.FC = () => {
           </div>
 
           {/* Full Specifications Sheet */}
-          <div className="glass-panel rounded-3xl p-6">
-            <h2 className="mb-6 text-base font-extrabold text-white uppercase tracking-wider">Specifications Sheet</h2>
+          <div className="glass-panel rounded-3xl p-6 border border-border bg-white shadow-sm">
+            <h2 className="mb-6 text-base font-extrabold text-foreground uppercase tracking-wider border-b border-border pb-2">Specifications Sheet</h2>
             
-            <div className="divide-y divide-border/60 text-xs">
+            <div className="divide-y divide-border text-xs">
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Processor</span>
-                <span className="col-span-2 text-white font-medium">{phone.processor}</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.processor}</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Graphics Card</span>
-                <span className="col-span-2 text-white font-medium">{phone.gpu}</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.gpu}</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">RAM Capacity</span>
-                <span className="col-span-2 text-white font-medium">{phone.ram_gb} GB LPDDR5X</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.ram_gb} GB LPDDR5X</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Internal Memory</span>
-                <span className="col-span-2 text-white font-medium">{phone.storage_gb} GB UFS 4.0</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.storage_gb} GB UFS 4.0</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Display Profile</span>
-                <span className="col-span-2 text-white font-medium">{phone.display_size}" {phone.display_type} ({phone.resolution})</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.display_size}" {phone.display_type} ({phone.resolution})</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Refresh Rate</span>
-                <span className="col-span-2 text-white font-medium">{phone.refresh_rate} Hz Adaptive</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.refresh_rate} Hz Adaptive</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Battery Specs</span>
-                <span className="col-span-2 text-white font-medium">{phone.battery_capacity} mAh battery | {phone.charging_speed}W Fast Charger</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.battery_capacity} mAh battery | {phone.charging_speed}W Fast Charger</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Water Proofing</span>
-                <span className="col-span-2 text-white font-medium">{phone.ip_rating} rating</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.ip_rating} rating</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Chassis Quality</span>
-                <span className="col-span-2 text-white font-medium">{phone.build_quality} ({phone.weight_g}g)</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.build_quality} ({phone.weight_g}g)</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Android Version</span>
-                <span className="col-span-2 text-white font-medium">{phone.android_version} | {phone.software_updates_years} Years Updates</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.android_version} | {phone.software_updates_years} Years Updates</span>
               </div>
               <div className="grid grid-cols-3 py-2.5">
                 <span className="font-semibold text-muted-foreground">Connectivity</span>
-                <span className="col-span-2 text-white font-medium">{phone.network_support}</span>
+                <span className="col-span-2 text-foreground font-semibold">{phone.network_support}</span>
               </div>
             </div>
           </div>
@@ -349,20 +349,20 @@ export const PhoneDetails: React.FC = () => {
         {/* Right Column: Price Trend + Suggested Matches (1/3 width) */}
         <div className="space-y-8">
           {/* Price History Line Graph */}
-          <div className="glass-panel rounded-3xl p-6 text-left">
-            <h2 className="mb-4 text-sm font-bold text-white uppercase tracking-wider">6-Month Price Trend</h2>
+          <div className="glass-panel rounded-3xl p-6 text-left border border-border bg-white shadow-sm">
+            <h2 className="mb-4 text-sm font-bold text-foreground uppercase tracking-wider border-b border-border pb-2">6-Month Price Trend</h2>
             <div className="h-44 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={priceHistoryData} margin={{ left: -15, right: 10, top: 10, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-                  <XAxis dataKey="month" stroke="#71717a" fontSize={10} />
-                  <YAxis stroke="#71717a" fontSize={10} domain={['auto', 'auto']} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
+                  <XAxis dataKey="month" stroke="#666666" fontSize={10} />
+                  <YAxis stroke="#666666" fontSize={10} domain={['auto', 'auto']} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: '8px' }}
-                    labelStyle={{ color: '#fafafa', fontSize: '10px' }}
-                    itemStyle={{ color: '#06b6d4', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#EAEAEA', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
+                    labelStyle={{ color: '#1A1A1A', fontSize: '10px' }}
+                    itemStyle={{ color: '#FFB300', fontSize: '12px' }}
                   />
-                  <Line type="monotone" dataKey="price" stroke="#06b6d4" strokeWidth={2.5} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                  <Line type="monotone" dataKey="price" stroke="#FFB300" strokeWidth={2.5} dot={{ r: 4 }} activeDot={{ r: 6 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -372,20 +372,20 @@ export const PhoneDetails: React.FC = () => {
           </div>
 
           {/* You May Also Compare shortcuts */}
-          <div className="glass-panel rounded-3xl p-6 text-left">
-            <h2 className="mb-4 text-sm font-bold text-white uppercase tracking-wider">You May Also Compare</h2>
+          <div className="glass-panel rounded-3xl p-6 text-left border border-border bg-white shadow-sm">
+            <h2 className="mb-4 text-sm font-bold text-foreground uppercase tracking-wider border-b border-border pb-2">You May Also Compare</h2>
             <div className="space-y-3">
               {related.map((alt) => (
                 <Link
                   key={alt.id}
                   to={`/compare?ids=${phone.id},${alt.id}`}
-                  className="flex items-center justify-between rounded-xl bg-secondary/30 border border-border/40 p-3 hover:bg-secondary transition-all group"
+                  className="flex items-center justify-between rounded-xl bg-neutral-50 border border-border p-3 hover:bg-neutral-100 transition-all group shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <img src={alt.image_url} alt={alt.model} className="h-10 w-10 rounded object-cover" />
                     <div>
-                      <div className="text-[10px] font-bold text-accent uppercase">{alt.brand_name}</div>
-                      <div className="text-xs font-bold text-white group-hover:text-accent transition-colors">{phone.model} <span className="text-muted-foreground font-light text-[10px]">vs</span> {alt.model}</div>
+                      <div className="text-[10px] font-bold text-secondary uppercase">{alt.brand_name}</div>
+                      <div className="text-xs font-bold text-foreground group-hover:text-secondary transition-colors">{phone.model} <span className="text-muted-foreground font-light text-[10px]">vs</span> {alt.model}</div>
                     </div>
                   </div>
                   <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
@@ -397,9 +397,9 @@ export const PhoneDetails: React.FC = () => {
       </section>
 
       {/* User Reviews Module */}
-      <section className="glass-panel mt-8 rounded-3xl p-6 md:p-10">
-        <h2 className="flex items-center gap-2 text-xl font-bold tracking-tight text-white uppercase tracking-wider">
-          <MessageSquare className="h-5 w-5 text-accent" />
+      <section className="glass-panel mt-8 rounded-3xl p-6 md:p-10 border border-border bg-white shadow-sm">
+        <h2 className="flex items-center gap-2 text-xl font-bold tracking-tight text-foreground uppercase tracking-wider border-b border-border pb-3">
+          <MessageSquare className="h-5 w-5 text-secondary" />
           Community Reviews
         </h2>
 
@@ -407,21 +407,21 @@ export const PhoneDetails: React.FC = () => {
           {/* Reviews List (2/3 width) */}
           <div className="md:col-span-2 space-y-4">
             {reviews.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-border/80 bg-secondary/5 py-12 text-center text-xs text-muted-foreground">
+              <div className="rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 py-12 text-center text-xs text-muted-foreground">
                 No approved reviews for this smartphone yet. Be the first to write one!
               </div>
             ) : (
               reviews.map((rev) => (
-                <div key={rev.id} className="rounded-2xl border border-border/50 bg-secondary/20 p-5 text-left">
+                <div key={rev.id} className="rounded-2xl border border-border bg-white p-5 text-left shadow-sm">
                   <div className="flex items-center gap-3">
                     <img src={rev.user_avatar} alt={rev.user_name} className="h-8 w-8 rounded-full" />
                     <div>
-                      <h4 className="text-xs font-bold text-white">{rev.user_name}</h4>
+                      <h4 className="text-xs font-bold text-foreground">{rev.user_name}</h4>
                       <div className="mt-0.5 flex gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star
                             key={i}
-                            className={`h-3 w-3 ${i < rev.rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`}
+                            className={`h-3 w-3 ${i < rev.rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted'}`}
                           />
                         ))}
                       </div>
@@ -430,7 +430,7 @@ export const PhoneDetails: React.FC = () => {
                       {new Date(rev.created_at).toLocaleDateString()}
                     </span>
                   </div>
-                  <p className="mt-3 text-xs text-neutral-300 leading-relaxed">
+                  <p className="mt-3 text-xs text-neutral-600 leading-relaxed">
                     {rev.comment}
                   </p>
                 </div>
@@ -439,8 +439,8 @@ export const PhoneDetails: React.FC = () => {
           </div>
 
           {/* Submit Review Box (1/3 width) */}
-          <div className="rounded-2xl border border-border bg-secondary/30 p-5 text-left h-fit">
-            <h3 className="text-sm font-bold text-white">Write a Review</h3>
+          <div className="rounded-2xl border border-border bg-neutral-50 p-5 text-left h-fit shadow-sm">
+            <h3 className="text-sm font-bold text-foreground">Write a Review</h3>
             
             {token ? (
               <form onSubmit={handleReviewSubmit} className="mt-4 space-y-4">
@@ -454,7 +454,7 @@ export const PhoneDetails: React.FC = () => {
                         onClick={() => setRating(star)}
                         className="text-muted-foreground hover:scale-110 transition-transform"
                       >
-                        <Star className={`h-5 w-5 ${star <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted'}`} />
+                        <Star className={`h-5 w-5 ${star <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-neutral-300'}`} />
                       </button>
                     ))}
                   </div>
@@ -468,13 +468,13 @@ export const PhoneDetails: React.FC = () => {
                     placeholder="Provide details about camera blur, gaming lag, or battery cycles..."
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-border bg-secondary/80 p-3 text-xs text-white placeholder-muted-foreground outline-none focus:border-accent"
+                    className="mt-1 w-full rounded-xl border border-border bg-white p-3 text-xs text-foreground placeholder-muted-foreground outline-none focus:border-primary"
                   />
                 </div>
 
                 {submitMsg && (
                   <div className={`rounded-lg p-2.5 text-center text-xs font-semibold ${
-                    submitMsg.includes('Error') ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'bg-accent/10 text-accent border border-accent/20'
+                    submitMsg.includes('Error') ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-primary/10 text-amber-800 border border-primary/20'
                   }`}>
                     {submitMsg}
                   </div>
@@ -483,7 +483,7 @@ export const PhoneDetails: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl bg-white py-2 text-xs font-bold text-black hover:bg-neutral-200 disabled:opacity-50 transition-colors"
+                  className="w-full rounded-xl bg-primary py-2 text-xs font-bold text-foreground hover:bg-secondary disabled:opacity-50 transition-colors"
                 >
                   {isSubmitting ? 'Posting...' : 'Submit Review'}
                 </button>
@@ -493,7 +493,7 @@ export const PhoneDetails: React.FC = () => {
                 <p className="text-xs text-muted-foreground">You must log in to submit a review.</p>
                 <Link
                   to="/auth"
-                  className="mt-4 inline-block rounded-xl bg-white px-4 py-2 text-xs font-bold text-black hover:bg-neutral-200"
+                  className="mt-4 inline-block rounded-xl bg-primary px-4 py-2 text-xs font-bold text-foreground hover:bg-secondary transition-colors"
                 >
                   Log In
                 </Link>

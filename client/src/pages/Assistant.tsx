@@ -13,7 +13,7 @@ export const Assistant: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: `### Hello! I am your Smartphone Compare AI Platform Assistant 👋\n\nI can help you review, filter, and compare smartphones. You can ask me questions like:\n- *"I need a phone under ₹30,000 for gaming."*\n- *"Which has a better camera: Galaxy S25 Ultra or Pixel 9 Pro XL?"*\n- *"Show me phones that support wireless charging."*\n\nHow can I help you choose your next device today?`,
+      content: `### Hello! I am your Smartphone Compare AI Platform Assistant\n\nI can help you review, filter, and compare smartphones. You can ask me questions like:\n- *"I need a phone under ₹30,000 for gaming."*\n- *"Which has a better camera: Galaxy S25 Ultra or Pixel 9 Pro XL?"*\n- *"Show me phones that support wireless charging."*\n\nHow can I help you choose your next device today?`,
       timestamp: new Date()
     }
   ]);
@@ -70,7 +70,7 @@ export const Assistant: React.FC = () => {
         ...prev,
         {
           role: 'assistant',
-          content: '### Connection error occurred ⚠️\n\nI was unable to query my knowledge base. Please check your internet connection or try again shortly.',
+          content: '### Connection error occurred\n\nI was unable to query my knowledge base. Please check your internet connection or try again shortly.',
           timestamp: new Date()
         }
       ]);
@@ -87,7 +87,7 @@ export const Assistant: React.FC = () => {
     setMessages([
       {
         role: 'assistant',
-        content: `### Hello! I am your Smartphone Compare AI Platform Assistant 👋\n\nI can help you review, filter, and compare smartphones. You can ask me questions like:\n- *"I need a phone under ₹30,000 for gaming."*\n- *"Which has a better camera: Galaxy S25 Ultra or Pixel 9 Pro XL?"*\n- *"Show me phones that support wireless charging."*\n\nHow can I help you choose your next device today?`,
+        content: `### Hello! I am your Smartphone Compare AI Platform Assistant\n\nI can help you review, filter, and compare smartphones. You can ask me questions like:\n- *"I need a phone under ₹30,000 for gaming."*\n- *"Which has a better camera: Galaxy S25 Ultra or Pixel 9 Pro XL?"*\n- *"Show me phones that support wireless charging."*\n\nHow can I help you choose your next device today?`,
         timestamp: new Date()
       }
     ]);
@@ -97,14 +97,14 @@ export const Assistant: React.FC = () => {
   const renderMessageContent = (content: string) => {
     return content.split('\n\n').map((para, pIdx) => {
       if (para.startsWith('###')) {
-        return <h3 key={pIdx} className="text-sm font-extrabold text-white mt-3 mb-1.5 flex items-center gap-1"><Sparkles className="h-4 w-4 text-yellow-400" /> {para.replace('###', '')}</h3>;
+        return <h3 key={pIdx} className="text-sm font-extrabold text-foreground mt-3 mb-1.5 flex items-center gap-1"><Sparkles className="h-4 w-4 text-secondary" /> {para.replace('###', '')}</h3>;
       }
       if (para.startsWith('##')) {
-        return <h2 key={pIdx} className="text-base font-extrabold text-white mt-4 mb-2">{para.replace('##', '')}</h2>;
+        return <h2 key={pIdx} className="text-base font-extrabold text-foreground mt-4 mb-2">{para.replace('##', '')}</h2>;
       }
       if (para.startsWith('-') || para.startsWith('*')) {
         return (
-          <ul key={pIdx} className="list-disc pl-4 space-y-1.5 text-xs text-neutral-300">
+          <ul key={pIdx} className="list-disc pl-4 space-y-1.5 text-xs text-neutral-600">
             {para.split('\n').map((li, lIdx) => (
               <li key={lIdx}>{li.replace(/^[\s*-]+/, '').replace(/\*\*/g, '')}</li>
             ))}
@@ -112,10 +112,10 @@ export const Assistant: React.FC = () => {
         );
       }
       return (
-        <p key={pIdx} className="text-xs text-neutral-300 leading-relaxed">
+        <p key={pIdx} className="text-xs text-neutral-600 leading-relaxed">
           {para.split(' ').map((word, wIdx) => {
             if (word.startsWith('**') && word.endsWith('**')) {
-              return <strong key={wIdx} className="text-white font-bold">{word.replace(/\*\*/g, '')} </strong>;
+              return <strong key={wIdx} className="text-foreground font-bold">{word.replace(/\*\*/g, '')} </strong>;
             }
             return word + ' ';
           })}
@@ -125,18 +125,18 @@ export const Assistant: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto flex h-[85vh] max-w-5xl flex-col px-4 py-6 md:px-8 text-left">
+    <div className="mx-auto flex h-[85vh] max-w-5xl flex-col px-4 py-6 md:px-8 text-left bg-background text-foreground">
       {/* Head */}
-      <header className="mb-4 flex items-center justify-between border-b border-border/80 pb-4">
+      <header className="mb-4 flex items-center justify-between border-b border-border pb-4">
         <div>
-          <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent uppercase tracking-wider">
-            <Sparkles className="h-3.5 w-3.5 text-cyan-400" /> Conversational Guru
+          <span className="inline-flex items-center gap-1 text-xs font-semibold text-secondary uppercase tracking-wider">
+            <Sparkles className="h-3.5 w-3.5" /> Conversational Guru
           </span>
-          <h1 className="mt-1 text-xl font-extrabold text-white">AI Chat Assistant</h1>
+          <h1 className="mt-1 text-xl font-extrabold text-foreground">AI Chat Assistant</h1>
         </div>
         <button
           onClick={handleClearChat}
-          className="flex items-center gap-1 rounded-lg border border-border bg-secondary/40 px-3 py-1.5 text-[10px] font-bold text-muted-foreground hover:text-white transition-colors"
+          className="flex items-center gap-1 rounded-lg border border-border bg-neutral-50 px-3 py-1.5 text-[10px] font-bold text-muted-foreground hover:text-foreground transition-colors"
         >
           <RefreshCw className="h-3.5 w-3.5" /> Reset Chat
         </button>
@@ -146,26 +146,26 @@ export const Assistant: React.FC = () => {
       <div className="mb-4 flex flex-wrap gap-2">
         <button
           onClick={() => handleQuickQuestion('Recommend gaming phones under ₹30,000')}
-          className="rounded-full bg-secondary/60 border border-border px-3 py-1 text-[10px] font-semibold text-muted-foreground hover:bg-secondary hover:text-white transition-all"
+          className="rounded-full bg-neutral-50 border border-border px-3 py-1 text-[10px] font-semibold text-muted-foreground hover:bg-neutral-100 hover:text-foreground transition-all"
         >
-          🎮 Gaming under 30k
+          Analyse Gaming under 30k
         </button>
         <button
           onClick={() => handleQuickQuestion('Which phone has the absolute best camera?')}
-          className="rounded-full bg-secondary/60 border border-border px-3 py-1 text-[10px] font-semibold text-muted-foreground hover:bg-secondary hover:text-white transition-all"
+          className="rounded-full bg-neutral-50 border border-border px-3 py-1 text-[10px] font-semibold text-muted-foreground hover:bg-neutral-100 hover:text-foreground transition-all"
         >
-          📸 Best camera phone
+          Analyse Best camera phone
         </button>
         <button
           onClick={() => handleQuickQuestion('Compare OnePlus 12 and Galaxy S24 Ultra')}
-          className="rounded-full bg-secondary/60 border border-border px-3 py-1 text-[10px] font-semibold text-muted-foreground hover:bg-secondary hover:text-white transition-all"
+          className="rounded-full bg-neutral-50 border border-border px-3 py-1 text-[10px] font-semibold text-muted-foreground hover:bg-neutral-100 hover:text-foreground transition-all"
         >
-          ⚖️ OnePlus 12 vs S24 Ultra
+          Compare OnePlus 12 vs S24 Ultra
         </button>
       </div>
 
       {/* Messages Board */}
-      <div className="flex-1 overflow-y-auto rounded-2xl border border-border bg-card/20 p-4 md:p-6 space-y-6">
+      <div className="flex-1 overflow-y-auto rounded-2xl border border-border bg-white p-4 md:p-6 space-y-6 shadow-sm">
         {messages.map((msg, idx) => (
           <div
             key={idx}
@@ -174,17 +174,17 @@ export const Assistant: React.FC = () => {
             {/* Avatar */}
             <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold border ${
               msg.role === 'user' 
-                ? 'bg-secondary text-white border-border' 
-                : 'bg-accent/15 text-accent border-accent/20'
+                ? 'bg-neutral-100 text-foreground border-border' 
+                : 'bg-primary/20 text-amber-800 border-primary/30'
             }`}>
-              {msg.role === 'user' ? <User className="h-4 w-4" /> : <Sparkles className="h-4 w-4 text-cyan-400" />}
+              {msg.role === 'user' ? <User className="h-4 w-4" /> : <Sparkles className="h-4 w-4 text-secondary" />}
             </div>
 
             {/* Bubble */}
-            <div className={`rounded-2xl px-4 py-3 border text-xs text-left shadow-lg ${
+            <div className={`rounded-2xl px-4 py-3 border text-xs text-left shadow-sm ${
               msg.role === 'user'
-                ? 'bg-secondary/40 border-border rounded-tr-none text-white'
-                : 'bg-secondary/20 border-border/60 rounded-tl-none'
+                ? 'bg-primary/10 border-primary/20 rounded-tr-none text-foreground'
+                : 'bg-neutral-50 border-border rounded-tl-none text-foreground'
             }`}>
               <div className="space-y-3">{renderMessageContent(msg.content)}</div>
               <div className="mt-2 text-right text-[8px] text-muted-foreground font-mono">
@@ -197,13 +197,13 @@ export const Assistant: React.FC = () => {
         {/* Loading Indicator */}
         {loading && (
           <div className="flex max-w-[85%] gap-3.5 mr-auto items-center">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 border border-accent/20 text-accent">
-              <Sparkles className="h-4 w-4 text-cyan-400 animate-spin" />
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/20 border border-primary/30 text-amber-800">
+              <Sparkles className="h-4 w-4 text-secondary animate-spin" />
             </div>
-            <div className="rounded-2xl px-4 py-3 bg-secondary/15 border border-border/50 rounded-tl-none flex items-center gap-1.5 text-xs text-muted-foreground">
-              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent" style={{ animationDelay: '0ms' }} />
-              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent" style={{ animationDelay: '150ms' }} />
-              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent" style={{ animationDelay: '300ms' }} />
+            <div className="rounded-2xl px-4 py-3 bg-neutral-50 border border-border rounded-tl-none flex items-center gap-1.5 text-xs text-muted-foreground">
+              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-secondary" style={{ animationDelay: '0ms' }} />
+              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-secondary" style={{ animationDelay: '150ms' }} />
+              <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-secondary" style={{ animationDelay: '300ms' }} />
             </div>
           </div>
         )}
@@ -224,12 +224,12 @@ export const Assistant: React.FC = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={loading}
-          className="flex-1 rounded-xl border border-border bg-secondary/40 p-3 text-xs text-white placeholder-muted-foreground outline-none focus:border-accent disabled:opacity-50"
+          className="flex-1 rounded-xl border border-border bg-neutral-50 p-3 text-xs text-foreground placeholder-muted-foreground outline-none focus:border-primary focus:bg-white disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-black hover:bg-neutral-200 disabled:opacity-40 transition-colors"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-foreground hover:bg-secondary disabled:opacity-40 transition-colors"
         >
           <Send className="h-4 w-4" />
         </button>

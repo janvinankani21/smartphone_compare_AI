@@ -8,52 +8,52 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#09090b',
-        foreground: '#fafafa',
+        background: '#F5F2EB',
+        foreground: '#1A1A1A',
         card: {
-          DEFAULT: '#18181b',
-          foreground: '#fafafa',
-          hover: '#27272a'
+          DEFAULT: '#FFFFFF',
+          foreground: '#1A1A1A',
+          hover: '#FFFDF5'
         },
         popover: {
-          DEFAULT: '#09090b',
-          foreground: '#fafafa',
+          DEFAULT: '#FFFFFF',
+          foreground: '#1A1A1A',
         },
         primary: {
-          DEFAULT: '#ffffff',
-          foreground: '#09090b',
+          DEFAULT: '#FFC107', // Primary Yellow
+          foreground: '#1A1A1A',
         },
         secondary: {
-          DEFAULT: '#27272a',
-          foreground: '#fafafa',
+          DEFAULT: '#FFB300', // Secondary Yellow
+          foreground: '#1A1A1A',
         },
         muted: {
-          DEFAULT: '#27272a',
-          foreground: '#a1a1aa',
+          DEFAULT: '#FFFDF5', // Section Background (#FFFDF5) as muted bg
+          foreground: '#666666', // Text Secondary (#666666)
         },
         accent: {
-          DEFAULT: '#06b6d4', // Cyan accent
-          foreground: '#fafafa',
+          DEFAULT: '#FFD54F', // Accent Yellow
+          foreground: '#1A1A1A',
         },
-        border: '#27272a',
-        input: '#27272a',
-        ring: '#d4d4d8',
-        better: '#10b981', // green
-        worse: '#f43f5e',  // red
-        similar: '#f59e0b' // yellow
+        border: '#EAEAEA',
+        input: '#EAEAEA',
+        ring: '#FFC107',
+        better: '#22C55E', // Success Green
+        worse: '#EF4444',  // Danger Red
+        similar: '#9CA3AF' // Gray for similar specs
       },
       borderRadius: {
-        lg: "0.75rem",
-        md: "0.5rem",
-        sm: "0.25rem",
+        lg: "1rem", // 16px radius as requested
+        md: "0.75rem",
+        sm: "0.375rem",
       },
       fontFamily: {
-        sans: ['Outfit', 'Inter', 'sans-serif'],
+        sans: ['Poppins', 'Inter', 'sans-serif'],
         mono: ['Fira Code', 'monospace']
       },
       boxShadow: {
-        glass: '0 4px 30px rgba(0, 0, 0, 0.4)',
-        border: '0 0 0 1px rgba(255, 255, 255, 0.08)',
+        glass: '0 4px 20px rgba(0, 0, 0, 0.03)',
+        border: '0 0 0 1px #EAEAEA',
       }
     },
   },

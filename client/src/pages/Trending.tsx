@@ -94,18 +94,18 @@ export const Trending: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left">
+    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left bg-background text-foreground">
       {/* Head */}
-      <header className="mb-8">
-        <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent uppercase tracking-wider">
+      <header className="mb-8 border-b border-border pb-4">
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider">
           <Filter className="h-3.5 w-3.5" /> Specs Explorer
         </span>
-        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-white font-sans">
+        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground font-sans">
           Smartphone Catalog
         </h1>
         {searchParams.get('search') && (
-          <p className="mt-1 text-xs text-muted-foreground">
-            Showing results for query: <span className="text-accent font-bold">"{searchParams.get('search')}"</span>
+          <p className="mt-1.5 text-xs text-muted-foreground">
+            Showing results for query: <span className="text-secondary font-bold">"{searchParams.get('search')}"</span>
           </p>
         )}
       </header>
@@ -113,27 +113,27 @@ export const Trending: React.FC = () => {
       {/* Main filters split grid */}
       <div className="grid gap-8 md:grid-cols-4">
         {/* Left Side: Filter Form Panel (1/4 width) */}
-        <div className="glass-panel h-fit rounded-2xl p-5">
+        <div className="glass-panel h-fit rounded-2xl p-5 border border-border bg-white shadow-sm">
           <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
-            <h3 className="flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-wider">
+            <h3 className="flex items-center gap-1.5 text-xs font-bold text-foreground uppercase tracking-wider">
               <SlidersHorizontal className="h-4 w-4" /> Filters
             </h3>
             <button
               onClick={handleClearFilters}
-              className="flex items-center gap-1 text-[10px] font-bold text-muted-foreground hover:text-white"
+              className="flex items-center gap-1 text-[10px] font-bold text-muted-foreground hover:text-foreground"
             >
               <RotateCcw className="h-3.5 w-3.5" /> Reset
             </button>
           </div>
 
-          <form onSubmit={handleApplyFilters} className="space-y-5 text-xs">
+          <form onSubmit={handleApplyFilters} className="space-y-5 text-xs text-foreground">
             {/* Brand Dropdown */}
             <div>
               <label className="text-[10px] font-bold text-muted-foreground uppercase">Brand</label>
               <select
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                className="mt-1.5 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
               >
                 <option value="">All Brands</option>
                 {brandOptions.map(b => (
@@ -148,7 +148,7 @@ export const Trending: React.FC = () => {
               <select
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                className="mt-1.5 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
               >
                 <option value="">No Limit</option>
                 <option value="15000">Under ₹15,000</option>
@@ -167,7 +167,7 @@ export const Trending: React.FC = () => {
                 placeholder="e.g. Snapdragon, Tensor"
                 value={processor}
                 onChange={(e) => setProcessor(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white placeholder-muted-foreground outline-none"
+                className="mt-1.5 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground placeholder-muted-foreground outline-none focus:border-primary focus:bg-white"
               />
             </div>
 
@@ -177,7 +177,7 @@ export const Trending: React.FC = () => {
               <select
                 value={ram}
                 onChange={(e) => setRam(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                className="mt-1.5 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
               >
                 <option value="">Any RAM</option>
                 <option value="6">6 GB and above</option>
@@ -192,7 +192,7 @@ export const Trending: React.FC = () => {
               <select
                 value={storage}
                 onChange={(e) => setStorage(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                className="mt-1.5 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
               >
                 <option value="">Any Storage</option>
                 <option value="64">64 GB and above</option>
@@ -205,39 +205,39 @@ export const Trending: React.FC = () => {
             <div className="space-y-3 pt-2">
               <label className="text-[10px] font-bold text-muted-foreground uppercase">Hardware Features</label>
               <div className="space-y-2">
-                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-white">
+                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-foreground">
                   <input
                     type="checkbox"
                     checked={amoled}
                     onChange={(e) => setAmoled(e.target.checked)}
-                    className="accent-accent"
+                    className="accent-primary"
                   />
                   <span>AMOLED / OLED Screen</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-white">
+                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-foreground">
                   <input
                     type="checkbox"
                     checked={support5g}
                     onChange={(e) => setSupport5g(e.target.checked)}
-                    className="accent-accent"
+                    className="accent-primary"
                   />
                   <span>5G Enabled</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-white">
+                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-foreground">
                   <input
                     type="checkbox"
                     checked={nfc}
                     onChange={(e) => setNfc(e.target.checked)}
-                    className="accent-accent"
+                    className="accent-primary"
                   />
                   <span>NFC Chipset</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-white">
+                <label className="flex items-center gap-2 cursor-pointer text-muted-foreground hover:text-foreground">
                   <input
                     type="checkbox"
                     checked={wirelessCharging}
                     onChange={(e) => setWirelessCharging(e.target.checked)}
-                    className="accent-accent"
+                    className="accent-primary"
                   />
                   <span>Wireless Charging</span>
                 </label>
@@ -246,7 +246,7 @@ export const Trending: React.FC = () => {
 
             <button
               type="submit"
-              className="w-full rounded-xl bg-white py-2 text-xs font-bold text-black hover:bg-neutral-200 transition-colors"
+              className="w-full rounded-xl bg-primary py-2.5 text-xs font-bold text-foreground hover:bg-secondary transition-colors"
             >
               Apply Filters
             </button>
@@ -258,13 +258,13 @@ export const Trending: React.FC = () => {
           {loading ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-80 w-full animate-pulse rounded-2xl border border-border bg-card/30" />
+                <div key={i} className="h-80 w-full animate-pulse rounded-2xl border border-border bg-neutral-50" />
               ))}
             </div>
           ) : phones.length === 0 ? (
-            <div className="glass-panel flex flex-col items-center justify-center rounded-2xl p-12 text-center">
+            <div className="glass-panel flex flex-col items-center justify-center rounded-2xl p-12 text-center border border-border bg-white shadow-sm">
               <SlidersHorizontal className="h-10 w-10 text-muted-foreground" />
-              <h2 className="mt-4 text-base font-bold text-white">No Phones Found</h2>
+              <h2 className="mt-4 text-base font-bold text-foreground">No Phones Found</h2>
               <p className="mt-2 text-xs text-muted-foreground max-w-xs mx-auto">
                 Try widening your search terms or unchecking feature parameters in the sidebar filter.
               </p>
@@ -274,8 +274,8 @@ export const Trending: React.FC = () => {
               {phones.map((phone) => {
                 const compared = isInCompare(phone.id);
                 return (
-                  <div key={phone.id} className="glass-card group flex flex-col justify-between overflow-hidden rounded-2xl p-4 text-left">
-                    <div className="relative mb-4 flex h-36 items-center justify-center rounded-xl bg-secondary/20 p-4 transition-transform group-hover:scale-[1.02]">
+                  <div key={phone.id} className="glass-card group flex flex-col justify-between overflow-hidden rounded-2xl p-4 text-left border border-border bg-white shadow-sm hover:border-primary">
+                    <div className="relative mb-4 flex h-36 items-center justify-center rounded-xl bg-neutral-50 p-4 transition-transform group-hover:scale-[1.02]">
                       <img src={phone.image_url} alt={phone.model} className="h-full max-h-32 object-contain" />
                       <div className="absolute right-2 top-2">
                         <ScoreGauge score={phone.overall_score} label="" size="sm" />
@@ -283,15 +283,15 @@ export const Trending: React.FC = () => {
                     </div>
 
                     <div>
-                      <div className="text-[9px] font-bold text-accent uppercase tracking-wide">{phone.brand_name}</div>
-                      <h3 className="mt-0.5 text-base font-bold text-white group-hover:text-accent transition-colors">
+                      <div className="text-[9px] font-bold text-secondary uppercase tracking-wide">{phone.brand_name}</div>
+                      <h3 className="mt-0.5 text-base font-bold text-foreground group-hover:text-secondary transition-colors truncate">
                         {phone.model}
                       </h3>
                       <p className="mt-1 text-[10px] text-muted-foreground line-clamp-1">{phone.processor}</p>
                       <p className="mt-1 text-[9px] text-muted-foreground font-semibold">Launched: {phone.launch_date}</p>
 
                       <div className="mt-2.5 flex items-baseline justify-between">
-                        <span className="text-sm font-black text-white">₹{phone.price_inr.toLocaleString()}</span>
+                        <span className="text-sm font-black text-foreground">₹{phone.price_inr.toLocaleString()}</span>
                         <span className="text-[9px] text-muted-foreground font-mono">
                           RAM: {phone.ram_gb}GB | ROM: {phone.storage_gb}GB
                         </span>
@@ -301,7 +301,7 @@ export const Trending: React.FC = () => {
                     <div className="mt-4 flex gap-2">
                       <Link
                         to={`/phone/${phone.id}`}
-                        className="flex-1 rounded-lg border border-border bg-secondary/40 py-2 text-center text-xs font-bold text-white hover:bg-secondary"
+                        className="flex-1 rounded-lg border border-border bg-neutral-50 py-2 text-center text-xs font-bold text-foreground hover:bg-neutral-100"
                       >
                         Specs
                       </Link>
@@ -309,8 +309,8 @@ export const Trending: React.FC = () => {
                         onClick={() => addToCompare(phone)}
                         className={`flex-1 rounded-lg py-2 text-xs font-bold transition-all ${
                           compared
-                            ? 'bg-accent/20 text-accent border border-accent/40'
-                            : 'bg-white text-black hover:bg-neutral-200'
+                            ? 'bg-primary/20 text-amber-800 border border-primary/30'
+                            : 'bg-primary text-foreground hover:bg-secondary'
                         }`}
                       >
                         {compared ? 'In Bucket' : '+ Compare'}
@@ -326,3 +326,4 @@ export const Trending: React.FC = () => {
     </div>
   );
 };
+

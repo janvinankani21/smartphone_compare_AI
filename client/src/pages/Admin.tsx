@@ -211,13 +211,13 @@ export const Admin: React.FC = () => {
 
 
   return (
-    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left">
+    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left bg-background text-foreground">
       {/* Head */}
-      <header className="mb-8">
-        <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent uppercase tracking-wider">
+      <header className="mb-8 border-b border-border pb-4">
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider">
           <LayoutDashboard className="h-3.5 w-3.5" /> Portal Space
         </span>
-        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-white font-sans">
+        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground font-sans">
           Admin Dashboard
         </h1>
       </header>
@@ -227,7 +227,7 @@ export const Admin: React.FC = () => {
         <button
           onClick={() => setActiveTab('analytics')}
           className={`flex items-center gap-1.5 border-b-2 px-5 py-3 transition-colors ${
-            activeTab === 'analytics' ? 'border-accent text-white' : 'border-transparent text-muted-foreground hover:text-white'
+            activeTab === 'analytics' ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground'
           }`}
         >
           <BarChart3 className="h-4 w-4" /> Performance Stats
@@ -235,18 +235,18 @@ export const Admin: React.FC = () => {
         <button
           onClick={() => setActiveTab('reviews')}
           className={`flex items-center gap-1.5 border-b-2 px-5 py-3 transition-colors ${
-            activeTab === 'reviews' ? 'border-accent text-white' : 'border-transparent text-muted-foreground hover:text-white'
+            activeTab === 'reviews' ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground'
           }`}
         >
           <MessageSquarePlus className="h-4 w-4" /> Reviews Moderation
           {stats?.pendingReviews > 0 && (
-            <span className="rounded-full bg-rose-500 px-2 py-0.5 text-[9px] text-white font-mono animate-bounce">{stats.pendingReviews}</span>
+            <span className="rounded-full bg-danger px-2 py-0.5 text-[9px] text-white font-mono animate-bounce">{stats.pendingReviews}</span>
           )}
         </button>
         <button
           onClick={() => setActiveTab('phones')}
           className={`flex items-center gap-1.5 border-b-2 px-5 py-3 transition-colors ${
-            activeTab === 'phones' ? 'border-accent text-white' : 'border-transparent text-muted-foreground hover:text-white'
+            activeTab === 'phones' ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground'
           }`}
         >
           <Smartphone className="h-4 w-4" /> Manage Catalog
@@ -255,7 +255,7 @@ export const Admin: React.FC = () => {
 
       {loading ? (
         <div className="flex h-96 items-center justify-center">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent border-t-transparent" />
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
         </div>
       ) : (
         <div>
@@ -264,20 +264,20 @@ export const Admin: React.FC = () => {
             <div className="space-y-8">
               {/* Stat boxes widgets */}
               <div className="grid gap-6 sm:grid-cols-3">
-                <div className="glass-panel rounded-2xl p-6">
+                <div className="glass-panel rounded-2xl p-6 border border-border bg-white shadow-sm">
                   <div className="text-xs font-bold text-muted-foreground uppercase">Registered Users</div>
-                  <div className="mt-2 text-3xl font-black text-white">{stats.totalUsers}</div>
-                  <p className="mt-1 text-[10px] text-better font-semibold flex items-center gap-1"><UserCheck className="h-3.5 w-3.5" /> Standard Roles</p>
+                  <div className="mt-2 text-3xl font-black text-foreground">{stats.totalUsers}</div>
+                  <p className="mt-1.5 text-[10px] text-success font-semibold flex items-center gap-1"><UserCheck className="h-3.5 w-3.5" /> Standard Roles</p>
                 </div>
-                <div className="glass-panel rounded-2xl p-6">
+                <div className="glass-panel rounded-2xl p-6 border border-border bg-white shadow-sm">
                   <div className="text-xs font-bold text-muted-foreground uppercase">Devices Catalog</div>
-                  <div className="mt-2 text-3xl font-black text-white">{stats.totalPhones}</div>
-                  <p className="mt-1 text-[10px] text-accent font-semibold flex items-center gap-1"><Smartphone className="h-3.5 w-3.5" /> Seeding models loaded</p>
+                  <div className="mt-2 text-3xl font-black text-foreground">{stats.totalPhones}</div>
+                  <p className="mt-1.5 text-[10px] text-secondary font-semibold flex items-center gap-1"><Smartphone className="h-3.5 w-3.5" /> Seeding models loaded</p>
                 </div>
-                <div className="glass-panel rounded-2xl p-6">
+                <div className="glass-panel rounded-2xl p-6 border border-border bg-white shadow-sm">
                   <div className="text-xs font-bold text-muted-foreground uppercase">Pending Approvals</div>
-                  <div className="mt-2 text-3xl font-black text-white">{stats.pendingReviews}</div>
-                  <p className={`mt-1 text-[10px] font-semibold ${stats.pendingReviews > 0 ? 'text-rose-400' : 'text-muted-foreground'}`}>
+                  <div className="mt-2 text-3xl font-black text-foreground">{stats.pendingReviews}</div>
+                  <p className={`mt-1.5 text-[10px] font-semibold ${stats.pendingReviews > 0 ? 'text-danger' : 'text-muted-foreground'}`}>
                     {stats.pendingReviews > 0 ? 'Action required in moderation queue' : 'Clear review queues'}
                   </p>
                 </div>
@@ -286,44 +286,44 @@ export const Admin: React.FC = () => {
               {/* Graphical Charts Section */}
               <div className="grid gap-8 md:grid-cols-2">
                 {/* Traffic Activity area chart */}
-                <div className="glass-panel rounded-3xl p-6">
-                  <h3 className="mb-4 text-xs font-extrabold text-white uppercase tracking-wider">6-Month Traffic Analysis</h3>
+                <div className="glass-panel rounded-3xl p-6 border border-border bg-white shadow-sm">
+                  <h3 className="mb-4 text-xs font-extrabold text-foreground uppercase tracking-wider">6-Month Traffic Analysis</h3>
                   <div className="h-64 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={monthlyGrowth} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                         <defs>
                           <linearGradient id="colorComparisons" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.4}/>
-                            <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
+                            <stop offset="5%" stopColor="#FFC107" stopOpacity={0.4}/>
+                            <stop offset="95%" stopColor="#FFC107" stopOpacity={0}/>
                           </linearGradient>
                           <linearGradient id="colorSearches" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#a855f7" stopOpacity={0.2}/>
-                            <stop offset="95%" stopColor="#a855f7" stopOpacity={0}/>
+                            <stop offset="5%" stopColor="#FFB300" stopOpacity={0.2}/>
+                            <stop offset="95%" stopColor="#FFB300" stopOpacity={0}/>
                           </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-                        <XAxis dataKey="name" stroke="#71717a" fontSize={10} />
-                        <YAxis stroke="#71717a" fontSize={10} />
-                        <Tooltip contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: '8px', fontSize: '12px' }} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
+                        <XAxis dataKey="name" stroke="#666666" fontSize={10} />
+                        <YAxis stroke="#666666" fontSize={10} />
+                        <Tooltip contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#EAEAEA', borderRadius: '8px', fontSize: '12px', color: '#1A1A1A' }} />
                         <Legend fontSize={10} wrapperStyle={{ paddingTop: '10px' }} />
-                        <Area type="monotone" dataKey="views" name="Page Views" stroke="#06b6d4" fillOpacity={1} fill="url(#colorComparisons)" />
-                        <Area type="monotone" dataKey="searches" name="Searches Logged" stroke="#a855f7" fillOpacity={1} fill="url(#colorSearches)" />
+                        <Area type="monotone" dataKey="views" name="Page Views" stroke="#FFC107" fillOpacity={1} fill="url(#colorComparisons)" />
+                        <Area type="monotone" dataKey="searches" name="Searches Logged" stroke="#FFB300" fillOpacity={1} fill="url(#colorSearches)" />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
 
                 {/* Most viewed phone models bar chart */}
-                <div className="glass-panel rounded-3xl p-6">
-                  <h3 className="mb-4 text-xs font-extrabold text-white uppercase tracking-wider">Top 5 Most Viewed Models</h3>
+                <div className="glass-panel rounded-3xl p-6 border border-border bg-white shadow-sm">
+                  <h3 className="mb-4 text-xs font-extrabold text-foreground uppercase tracking-wider">Top 5 Most Viewed Models</h3>
                   <div className="h-64 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={mostCompared} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-                        <XAxis dataKey="model" stroke="#71717a" fontSize={9} tickFormatter={(v) => v.split(' ')[0]} />
-                        <YAxis stroke="#71717a" fontSize={10} />
-                        <Tooltip contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: '8px', fontSize: '11px' }} />
-                        <Bar dataKey="views_count" name="View Count" fill="#06b6d4" radius={[4, 4, 0, 0]} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
+                        <XAxis dataKey="model" stroke="#666666" fontSize={9} tickFormatter={(v) => v.split(' ')[0]} />
+                        <YAxis stroke="#666666" fontSize={10} />
+                        <Tooltip contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#EAEAEA', borderRadius: '8px', fontSize: '11px', color: '#1A1A1A' }} />
+                        <Bar dataKey="views_count" name="View Count" fill="#FFC107" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -334,11 +334,11 @@ export const Admin: React.FC = () => {
 
           {/* TAB 2: REVIEWS MODERATION */}
           {activeTab === 'reviews' && (
-            <div className="glass-panel rounded-3xl p-6">
-              <h2 className="mb-6 text-sm font-extrabold text-white uppercase tracking-wider">Comments Moderation List</h2>
+            <div className="glass-panel rounded-3xl p-6 border border-border bg-white shadow-sm">
+              <h2 className="mb-6 text-sm font-extrabold text-foreground uppercase tracking-wider">Comments Moderation List</h2>
               
               {pendingReviews.length === 0 ? (
-                <div className="py-12 text-center text-xs text-muted-foreground border border-dashed border-border/80 rounded-2xl">
+                <div className="py-12 text-center text-xs text-muted-foreground border border-dashed border-border bg-neutral-50 rounded-2xl">
                   No review feedback logged on the platform yet.
                 </div>
               ) : (
@@ -356,20 +356,20 @@ export const Admin: React.FC = () => {
                     </thead>
                     <tbody className="divide-y divide-border/60">
                       {pendingReviews.map((rev) => (
-                        <tr key={rev.id} className="hover:bg-secondary/15 transition-colors">
-                          <td className="py-4 pr-2 font-bold text-white">{rev.phone_model}</td>
+                        <tr key={rev.id} className="hover:bg-neutral-50 transition-colors">
+                          <td className="py-4 pr-2 font-bold text-foreground">{rev.phone_model}</td>
                           <td className="py-4 px-2 text-muted-foreground">{rev.user_email}</td>
                           <td className="py-4 px-2">
-                            <span className="flex items-center gap-0.5 text-yellow-400 font-bold">
+                            <span className="flex items-center gap-0.5 text-secondary font-bold">
                               {rev.rating} ★
                             </span>
                           </td>
-                          <td className="py-4 px-2 text-neutral-300 leading-normal max-w-sm truncate">{rev.comment}</td>
+                          <td className="py-4 px-2 text-neutral-600 leading-normal max-w-sm truncate">{rev.comment}</td>
                           <td className="py-4 px-2">
-                            <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-bold ${
+                            <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-bold border ${
                               rev.is_approved === 1 || rev.is_approved === true
-                                ? 'bg-better/10 text-better'
-                                : 'bg-yellow-500/10 text-yellow-500'
+                                ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
+                                : 'bg-amber-50 text-amber-600 border-amber-100'
                             }`}>
                               {rev.is_approved === 1 || rev.is_approved === true ? 'Approved' : 'Pending'}
                             </span>
@@ -379,7 +379,7 @@ export const Admin: React.FC = () => {
                               {!(rev.is_approved === 1 || rev.is_approved === true) ? (
                                 <button
                                   onClick={() => handleApproveReview(rev.id, true)}
-                                  className="rounded p-1 bg-better/15 text-better hover:bg-better/25 transition-colors"
+                                  className="rounded p-1 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border border-emerald-200 transition-colors"
                                   title="Approve Review"
                                 >
                                   <Check className="h-4.5 w-4.5" />
@@ -387,7 +387,7 @@ export const Admin: React.FC = () => {
                               ) : (
                                 <button
                                   onClick={() => handleApproveReview(rev.id, false)}
-                                  className="rounded p-1 bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500/20 transition-colors"
+                                  className="rounded p-1 bg-amber-50 text-amber-600 hover:bg-amber-100 border border-amber-200 transition-colors"
                                   title="Revoke Approval"
                                 >
                                   <X className="h-4.5 w-4.5" />
@@ -395,7 +395,7 @@ export const Admin: React.FC = () => {
                               )}
                               <button
                                 onClick={() => handleDeleteReview(rev.id)}
-                                className="rounded p-1 bg-rose-500/15 text-rose-400 hover:bg-rose-500/25 transition-colors"
+                                className="rounded p-1 bg-red-50 text-danger hover:bg-red-100 border border-red-200 transition-colors"
                                 title="Delete review entry"
                               >
                                 <Trash2 className="h-4.5 w-4.5" />
@@ -415,14 +415,14 @@ export const Admin: React.FC = () => {
           {activeTab === 'phones' && (
             <div className="grid gap-8 lg:grid-cols-3">
               {/* Left Column: Form to create device (2/3 width) */}
-              <div className="glass-panel rounded-3xl p-6 lg:col-span-2 text-left">
-                <h3 className="mb-6 flex items-center gap-1 text-sm font-extrabold text-white uppercase tracking-wider">
-                  <Plus className="h-4.5 w-4.5" /> Add Smartphone Model
+              <div className="glass-panel rounded-3xl p-6 lg:col-span-2 text-left border border-border bg-white shadow-sm">
+                <h3 className="mb-6 flex items-center gap-1.5 text-sm font-extrabold text-foreground uppercase tracking-wider">
+                  <Plus className="h-4.5 w-4.5 text-secondary" /> Add Smartphone Model
                 </h3>
 
                 {formMsg && (
-                  <div className={`mb-6 flex items-center gap-2 rounded-xl p-3 text-xs font-semibold ${
-                    formSuccess ? 'bg-better/15 text-better' : 'bg-rose-500/10 text-rose-400'
+                  <div className={`mb-6 flex items-center gap-2 rounded-xl p-3 text-xs font-semibold border ${
+                    formSuccess ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-danger border-red-200'
                   }`}>
                     <ShieldAlert className="h-4.5 w-4.5" />
                     <span>{formMsg}</span>
@@ -435,7 +435,7 @@ export const Admin: React.FC = () => {
                     <select
                       value={brandId}
                       onChange={(e) => setBrandId(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     >
                       <option value="1">Apple</option>
                       <option value="2">Samsung</option>
@@ -457,7 +457,7 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. Galaxy S24 Ultra"
                       value={model}
                       onChange={(e) => setModel(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -468,7 +468,7 @@ export const Admin: React.FC = () => {
                       required
                       value={launchDate}
                       onChange={(e) => setLaunchDate(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -480,7 +480,7 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. 129999"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -492,7 +492,7 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. Snapdragon 8 Gen 3"
                       value={processor}
                       onChange={(e) => setProcessor(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -503,7 +503,7 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. Adreno 750"
                       value={gpu}
                       onChange={(e) => setGpu(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -514,7 +514,7 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. 12"
                       value={ram}
                       onChange={(e) => setRam(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -525,7 +525,7 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. 256"
                       value={storage}
                       onChange={(e) => setStorage(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -536,7 +536,7 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. 6.8"
                       value={displaySize}
                       onChange={(e) => setDisplaySize(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
@@ -548,14 +548,14 @@ export const Admin: React.FC = () => {
                         placeholder="e.g. LTPO AMOLED"
                         value={displayType}
                         onChange={(e) => setDisplayType(e.target.value)}
-                        className="w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                        className="w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                       />
                       <input
                         type="number"
                         placeholder="e.g. 120"
                         value={refreshRate}
                         onChange={(e) => setRefreshRate(e.target.value)}
-                        className="w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                        className="w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                       />
                     </div>
                   </div>
@@ -568,14 +568,14 @@ export const Admin: React.FC = () => {
                         placeholder="e.g. 5000"
                         value={battery}
                         onChange={(e) => setBattery(e.target.value)}
-                        className="w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                        className="w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                       />
                       <input
                         type="number"
                         placeholder="e.g. 45"
                         value={charging}
                         onChange={(e) => setCharging(e.target.value)}
-                        className="w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                        className="w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                       />
                     </div>
                   </div>
@@ -587,14 +587,14 @@ export const Admin: React.FC = () => {
                       placeholder="e.g. 50MP Main (OIS) + 12MP Ultra-wide"
                       value={rearCamera}
                       onChange={(e) => setRearCamera(e.target.value)}
-                      className="mt-1 w-full rounded-lg border border-border bg-secondary/40 p-2 text-white outline-none"
+                      className="mt-1 w-full rounded-lg border border-border bg-neutral-50 p-2 text-foreground outline-none focus:border-primary focus:bg-white"
                     />
                   </div>
 
                   <div className="sm:col-span-2">
                     <button
                       type="submit"
-                      className="w-full rounded-xl bg-accent py-3 text-xs font-bold text-black hover:bg-cyan-400 transition-colors mt-2"
+                      className="w-full rounded-xl bg-primary py-3 text-xs font-bold text-foreground hover:bg-secondary transition-colors mt-2 shadow-sm"
                     >
                       Insert Smartphone Specification Record
                     </button>
@@ -603,25 +603,25 @@ export const Admin: React.FC = () => {
               </div>
 
               {/* Right Column: Mini List to edit/delete phones (1/3 width) */}
-              <div className="glass-panel rounded-3xl p-6 text-left h-[500px] flex flex-col justify-between">
+              <div className="glass-panel rounded-3xl p-6 text-left h-[500px] flex flex-col justify-between border border-border bg-white shadow-sm">
                 <div>
-                  <h3 className="mb-4 text-xs font-extrabold text-white uppercase tracking-wider">Device Directory</h3>
-                  <div className="overflow-y-auto max-h-[380px] space-y-2">
+                  <h3 className="mb-4 text-xs font-extrabold text-foreground uppercase tracking-wider">Device Directory</h3>
+                  <div className="overflow-y-auto max-h-[380px] space-y-2 pr-1">
                     {allPhones.map((phone) => (
                       <div
                         key={phone.id}
-                        className="flex items-center justify-between rounded-xl bg-secondary/20 border border-border/40 p-2.5 hover:bg-secondary/40 transition-colors"
+                        className="flex items-center justify-between rounded-xl bg-neutral-50 border border-border p-2.5 hover:bg-neutral-100/60 transition-colors"
                       >
                         <div className="flex items-center gap-2">
                           <img src={phone.image_url} alt={phone.model} className="h-8 w-8 rounded object-cover" />
                           <div className="text-[11px]">
-                            <div className="font-bold text-white truncate max-w-[120px]">{phone.model}</div>
+                            <div className="font-bold text-foreground truncate max-w-[120px]">{phone.model}</div>
                             <div className="text-muted-foreground font-mono">₹{phone.price_inr.toLocaleString()}</div>
                           </div>
                         </div>
                         <button
                           onClick={() => handleDeletePhone(phone.id)}
-                          className="rounded p-1 text-muted-foreground hover:bg-rose-500/15 hover:text-rose-400 transition-colors"
+                          className="rounded p-1 text-muted-foreground hover:bg-red-50 hover:text-danger border border-transparent hover:border-red-200 transition-colors"
                           title="Delete device"
                         >
                           <Trash2 className="h-4 w-4" />

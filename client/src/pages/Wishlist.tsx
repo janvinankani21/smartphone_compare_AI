@@ -49,21 +49,21 @@ export const Wishlist: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left">
+    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left bg-background text-foreground">
       {/* Head */}
-      <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
+      <header className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
         <div>
-          <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent uppercase tracking-wider">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider">
             <Heart className="h-3.5 w-3.5 text-rose-500" /> User Space
           </span>
-          <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-white font-sans">
+          <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground font-sans">
             My Wishlist
           </h1>
         </div>
         {phones.length > 1 && (
           <button
             onClick={handleCompareAll}
-            className="flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-black hover:bg-neutral-200 transition-colors"
+            className="flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2.5 text-xs font-bold text-foreground hover:bg-secondary transition-colors shadow-sm"
           >
             <Scale className="h-3.5 w-3.5" /> Compare All ({Math.min(4, phones.length)})
           </button>
@@ -72,19 +72,19 @@ export const Wishlist: React.FC = () => {
 
       {loading ? (
         <div className="flex h-96 items-center justify-center">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent border-t-transparent" />
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
         </div>
       ) : phones.length === 0 ? (
         /* Empty wishlist */
-        <div className="glass-panel flex flex-col items-center justify-center rounded-3xl p-12 text-center">
+        <div className="glass-panel flex flex-col items-center justify-center rounded-3xl p-12 text-center border border-border bg-white shadow-sm">
           <Heart className="h-10 w-10 text-muted-foreground" />
-          <h2 className="mt-4 text-base font-bold text-white">Your Wishlist is Empty</h2>
+          <h2 className="mt-4 text-base font-bold text-foreground">Your Wishlist is Empty</h2>
           <p className="mt-2 text-xs text-muted-foreground max-w-xs mx-auto">
             Explore the catalog and click the Heart icon on any device to save them for comparison later.
           </p>
           <Link
             to="/trending"
-            className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-black hover:bg-cyan-400"
+            className="mt-6 inline-flex items-center gap-1.5 rounded-xl bg-primary px-5 py-2.5 text-xs font-bold text-foreground hover:bg-secondary shadow-sm"
           >
             Browse Catalog <ArrowRight className="h-3.5 w-3.5" />
           </Link>
@@ -95,18 +95,18 @@ export const Wishlist: React.FC = () => {
           {phones.map((phone) => {
             const compared = isInCompare(phone.id);
             return (
-              <div key={phone.id} className="glass-card group flex flex-col justify-between overflow-hidden rounded-2xl p-4 text-left relative">
+              <div key={phone.id} className="glass-card group flex flex-col justify-between overflow-hidden rounded-2xl p-4 text-left border border-border bg-white shadow-sm hover:border-primary relative">
                 
                 {/* Remove button */}
                 <button
                   onClick={() => handleUnsave(phone.id)}
-                  className="absolute right-3 top-3 rounded-full bg-secondary/85 p-1.5 text-muted-foreground hover:text-rose-400 hover:bg-rose-500/10 transition-colors z-10"
+                  className="absolute right-3 top-3 rounded-full bg-neutral-50 border border-border p-1.5 text-muted-foreground hover:text-rose-500 hover:bg-rose-50 hover:border-rose-200 transition-colors z-10"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                 </button>
 
                 {/* Cover visual */}
-                <div className="relative mb-4 flex h-36 items-center justify-center rounded-xl bg-secondary/20 p-4 transition-transform group-hover:scale-[1.02]">
+                <div className="relative mb-4 flex h-36 items-center justify-center rounded-xl bg-neutral-50 p-4 border border-border/50 transition-transform group-hover:scale-[1.02]">
                   <img src={phone.image_url} alt={phone.model} className="h-full max-h-32 object-contain" />
                   <div className="absolute left-2 top-2">
                     <ScoreGauge score={phone.overall_score} label="" size="sm" />
@@ -115,17 +115,17 @@ export const Wishlist: React.FC = () => {
 
                 {/* Details */}
                 <div>
-                  <div className="text-[9px] font-bold text-accent uppercase tracking-wide">{phone.brand_name}</div>
-                  <h3 className="mt-0.5 text-base font-bold text-white group-hover:text-accent transition-colors">
+                  <div className="text-[9px] font-bold text-secondary uppercase tracking-wide">{phone.brand_name}</div>
+                  <h3 className="mt-0.5 text-base font-bold text-foreground group-hover:text-secondary transition-colors truncate">
                     {phone.model}
                   </h3>
-                  <div className="mt-2 text-sm font-black text-white">₹{phone.price_inr.toLocaleString()}</div>
+                  <div className="mt-2 text-sm font-black text-foreground">₹{phone.price_inr.toLocaleString()}</div>
                 </div>
 
                 <div className="mt-4 flex gap-2">
                   <Link
                     to={`/phone/${phone.id}`}
-                    className="flex-1 rounded-lg border border-border bg-secondary/40 py-2 text-center text-xs font-bold text-white hover:bg-secondary"
+                    className="flex-1 rounded-lg border border-border bg-neutral-50 py-2 text-center text-xs font-bold text-foreground hover:bg-neutral-100 transition-colors"
                   >
                     Specs
                   </Link>
@@ -133,11 +133,11 @@ export const Wishlist: React.FC = () => {
                     onClick={() => addToCompare(phone)}
                     className={`flex-1 rounded-lg py-2 text-xs font-bold transition-all ${
                       compared
-                        ? 'bg-accent/20 text-accent border border-accent/40'
-                        : 'bg-white text-black hover:bg-neutral-200'
+                        ? 'bg-primary/20 text-amber-800 border border-primary/30'
+                        : 'bg-primary text-foreground hover:bg-secondary'
                     }`}
                   >
-                    {compared ? 'Compared' : '+ Compare'}
+                    {compared ? 'In Bucket' : '+ Compare'}
                   </button>
                 </div>
               </div>
@@ -148,3 +148,4 @@ export const Wishlist: React.FC = () => {
     </div>
   );
 };
+

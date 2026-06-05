@@ -76,13 +76,13 @@ export const Finder: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left">
+    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 md:px-8 text-left bg-background text-foreground">
       {/* Header */}
-      <header className="mb-8">
-        <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent uppercase tracking-wider">
-          <Sparkles className="h-3.5 w-3.5 text-yellow-400" /> Matchmaker Wizard
+      <header className="mb-8 border-b border-border pb-4">
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-secondary uppercase tracking-wider">
+          <Sparkles className="h-3.5 w-3.5" /> Matchmaker Wizard
         </span>
-        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-white font-sans">
+        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground font-sans">
           Best Phone Finder
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -94,10 +94,10 @@ export const Finder: React.FC = () => {
         /* Setup Form Wizard */
         <div className="grid gap-8 md:grid-cols-3">
           {/* Step 1: Budget */}
-          <div className="glass-panel flex flex-col justify-between rounded-3xl p-6">
+          <div className="glass-panel flex flex-col justify-between rounded-3xl p-6 border border-border bg-white shadow-sm">
             <div>
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/25 text-xs font-bold text-accent">01</div>
-              <h2 className="mt-4 text-base font-extrabold text-white">Select Budget Segment</h2>
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/20 text-xs font-bold text-amber-800">01</div>
+              <h2 className="mt-4 text-base font-extrabold text-foreground">Select Budget Segment</h2>
               <div className="mt-6 space-y-3">
                 {budgetOptions.map((opt) => (
                   <label
@@ -105,8 +105,8 @@ export const Finder: React.FC = () => {
                     onClick={() => setBudget(opt.value)}
                     className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-all ${
                       budget === opt.value
-                        ? 'border-accent bg-accent/5'
-                        : 'border-border bg-secondary/20 hover:bg-secondary/40'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border bg-neutral-50 hover:bg-neutral-100'
                     }`}
                   >
                     <input
@@ -114,10 +114,10 @@ export const Finder: React.FC = () => {
                       name="budget"
                       checked={budget === opt.value}
                       readOnly
-                      className="mt-1 accent-accent"
+                      className="mt-1.5 accent-primary"
                     />
                     <div>
-                      <div className="text-xs font-bold text-white">{opt.label}</div>
+                      <div className="text-xs font-bold text-foreground">{opt.label}</div>
                       <div className="text-[10px] text-muted-foreground mt-0.5">{opt.desc}</div>
                     </div>
                   </label>
@@ -127,10 +127,10 @@ export const Finder: React.FC = () => {
           </div>
 
           {/* Step 2: Use Cases */}
-          <div className="glass-panel md:col-span-2 flex flex-col justify-between rounded-3xl p-6">
+          <div className="glass-panel md:col-span-2 flex flex-col justify-between rounded-3xl p-6 border border-border bg-white shadow-sm">
             <div>
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-400/25 text-xs font-bold text-yellow-400">02</div>
-              <h2 className="mt-4 text-base font-extrabold text-white">What will you use the phone for?</h2>
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/20 text-xs font-bold text-amber-800">02</div>
+              <h2 className="mt-4 text-base font-extrabold text-foreground">What will you use the phone for?</h2>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {usageOptions.map((opt) => {
                   const selected = usages.includes(opt.value);
@@ -140,18 +140,18 @@ export const Finder: React.FC = () => {
                       onClick={() => handleToggleUsage(opt.value)}
                       className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-all ${
                         selected
-                          ? 'border-yellow-400 bg-yellow-400/5'
-                          : 'border-border bg-secondary/20 hover:bg-secondary/40'
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border bg-neutral-50 hover:bg-neutral-100'
                       }`}
                     >
                       <input
                         type="checkbox"
                         checked={selected}
                         readOnly
-                        className="mt-1 accent-yellow-400"
+                        className="mt-1.5 accent-primary"
                       />
                       <div>
-                        <div className="text-xs font-bold text-white">{opt.value}</div>
+                        <div className="text-xs font-bold text-foreground">{opt.value}</div>
                         <div className="text-[10px] text-muted-foreground mt-0.5">{opt.desc}</div>
                       </div>
                     </div>
@@ -162,7 +162,7 @@ export const Finder: React.FC = () => {
 
             <button
               onClick={handleFind}
-              className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3 text-sm font-bold text-black hover:bg-neutral-200 transition-colors"
+              className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-bold text-foreground hover:bg-secondary transition-colors"
             >
               Find My Best Smartphone Match <ArrowRight className="h-4 w-4" />
             </button>
@@ -174,7 +174,7 @@ export const Finder: React.FC = () => {
           <div className="flex justify-end">
             <button
               onClick={handleReset}
-              className="flex items-center gap-1.5 rounded-lg border border-border bg-secondary/40 px-4 py-2 text-xs font-bold text-white hover:bg-secondary transition-colors"
+              className="flex items-center gap-1.5 rounded-lg border border-border bg-neutral-50 px-4 py-2 text-xs font-bold text-foreground hover:bg-neutral-100 transition-colors"
             >
               <RefreshCw className="h-3.5 w-3.5" /> Start Search Again
             </button>
@@ -182,14 +182,14 @@ export const Finder: React.FC = () => {
 
           {loading ? (
             <div className="flex h-96 flex-col items-center justify-center gap-4">
-              <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent border-t-transparent" />
+              <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
               <p className="text-xs text-muted-foreground animate-pulse">Running AI spec analysis engine...</p>
             </div>
           ) : recommendations.length === 0 ? (
             /* Empty matches */
-            <div className="glass-panel flex flex-col items-center justify-center rounded-3xl p-12 text-center">
+            <div className="glass-panel flex flex-col items-center justify-center rounded-3xl p-12 text-center border border-border bg-white shadow-sm">
               <ShieldAlert className="h-12 w-12 text-rose-500" />
-              <h2 className="mt-4 text-lg font-bold text-white">No Phones Found</h2>
+              <h2 className="mt-4 text-lg font-bold text-foreground">No Phones Found</h2>
               <p className="mx-auto mt-2 max-w-sm text-xs text-muted-foreground">
                 We couldn't find any phones directly matching your parameters. This could happen if the budget threshold is too low for the selected activities (e.g. video editing under 10k).
               </p>
@@ -199,7 +199,7 @@ export const Finder: React.FC = () => {
             <div className="grid gap-8 md:grid-cols-3">
               {/* Recommendations grid column (2/3 width) */}
               <div className="md:col-span-2 space-y-6">
-                <h2 className="text-lg font-bold text-white uppercase tracking-wider">Top 3 Recommended Matches</h2>
+                <h2 className="text-lg font-bold text-foreground uppercase tracking-wider border-b border-border pb-2">Top Recommended Matches</h2>
                 <div className="grid gap-6 sm:grid-cols-2">
                   {recommendations.map((phone, idx) => {
                     const compared = isInCompare(phone.id);
@@ -207,9 +207,9 @@ export const Finder: React.FC = () => {
                     const matchPercent = (phone as any).matchScore || phone.overall_score;
 
                     return (
-                      <div key={phone.id} className="glass-card group flex flex-col justify-between rounded-2xl p-5 text-left relative overflow-hidden">
+                      <div key={phone.id} className="glass-card group flex flex-col justify-between rounded-2xl p-5 text-left relative overflow-hidden border border-border bg-white shadow-sm hover:border-primary">
                         {/* Match ribbon */}
-                        <div className="absolute left-0 top-0 rounded-br-xl bg-accent px-3 py-1 text-[9px] font-bold text-black uppercase">
+                        <div className="absolute left-0 top-0 rounded-br-xl bg-primary px-3 py-1 text-[9px] font-bold text-foreground uppercase">
                           Pick #{idx + 1}
                         </div>
 
@@ -219,36 +219,36 @@ export const Finder: React.FC = () => {
                           </div>
                           
                           <div className="text-center">
-                            <span className="text-[10px] font-bold text-accent uppercase tracking-wide">{phone.brand_name}</span>
-                            <h3 className="text-base font-extrabold text-white mt-0.5">{phone.model}</h3>
-                            <div className="mt-2 text-base font-black text-white">₹{phone.price_inr.toLocaleString()}</div>
+                            <span className="text-[10px] font-bold text-secondary uppercase tracking-wide">{phone.brand_name}</span>
+                            <h3 className="text-base font-extrabold text-foreground mt-0.5">{phone.model}</h3>
+                            <div className="mt-2 text-base font-black text-foreground">₹{phone.price_inr.toLocaleString()}</div>
                           </div>
                         </div>
 
                         {/* Spec scores */}
-                        <div className="grid grid-cols-2 gap-3 py-3 border-t border-border/50 text-xs">
-                          <div className="flex justify-between border-r border-border/30 pr-2">
+                        <div className="grid grid-cols-2 gap-3 py-3 border-t border-border text-xs text-foreground">
+                          <div className="flex justify-between border-r border-border pr-2">
                             <span className="text-muted-foreground">Match Rating:</span>
-                            <span className="font-bold text-accent">{matchPercent}%</span>
+                            <span className="font-bold text-amber-700">{matchPercent}%</span>
                           </div>
                           <div className="flex justify-between pl-2">
                             <span className="text-muted-foreground">Speed Index:</span>
-                            <span className="font-bold text-white">{phone.performance_score}</span>
+                            <span className="font-bold text-foreground">{phone.performance_score}</span>
                           </div>
-                          <div className="flex justify-between border-r border-border/30 pr-2">
+                          <div className="flex justify-between border-r border-border pr-2">
                             <span className="text-muted-foreground">Camera Spec:</span>
-                            <span className="font-bold text-white">{phone.camera_score}</span>
+                            <span className="font-bold text-foreground">{phone.camera_score}</span>
                           </div>
                           <div className="flex justify-between pl-2">
                             <span className="text-muted-foreground">Battery Spec:</span>
-                            <span className="font-bold text-white">{phone.battery_score}</span>
+                            <span className="font-bold text-foreground">{phone.battery_score}</span>
                           </div>
                         </div>
 
                         <div className="mt-4 flex gap-2">
                           <Link
                             to={`/phone/${phone.id}`}
-                            className="flex-1 rounded-lg border border-border bg-secondary/30 py-2 text-center text-xs font-bold text-white hover:bg-secondary"
+                            className="flex-1 rounded-lg border border-border bg-neutral-50 py-2 text-center text-xs font-bold text-foreground hover:bg-neutral-100"
                           >
                             Details
                           </Link>
@@ -256,8 +256,8 @@ export const Finder: React.FC = () => {
                             onClick={() => addToCompare(phone)}
                             className={`flex-1 rounded-lg py-2 text-xs font-bold transition-all ${
                               compared
-                                ? 'bg-accent/20 text-accent border border-accent/40'
-                                : 'bg-white text-black hover:bg-neutral-200'
+                                ? 'bg-primary/20 text-amber-800 border border-primary/30'
+                                : 'bg-primary text-foreground hover:bg-secondary'
                             }`}
                           >
                             {compared ? 'In Bucket' : 'Add to Compare'}
@@ -270,19 +270,19 @@ export const Finder: React.FC = () => {
               </div>
 
               {/* AI Reasoning summary column (1/3 width) */}
-              <div className="glass-panel rounded-3xl p-6 self-start">
-                <h2 className="flex items-center gap-1.5 text-sm font-bold text-accent uppercase tracking-wider mb-4">
-                  <Sparkles className="h-4 w-4 text-yellow-400 animate-pulse" />
+              <div className="glass-panel rounded-3xl p-6 self-start border border-border bg-white shadow-sm">
+                <h2 className="flex items-center gap-1.5 text-xs font-bold text-secondary uppercase tracking-wider mb-4 border-b border-border pb-2">
+                  <Sparkles className="h-4 w-4 text-amber-500" />
                   AI Recommendation Detail
                 </h2>
                 
-                <div className="prose prose-invert text-xs text-neutral-300 leading-relaxed space-y-4">
+                <div className="prose text-xs text-neutral-600 leading-relaxed space-y-4">
                   {reasoning.split('\n\n').map((paragraph, index) => {
                     if (paragraph.startsWith('###')) {
-                      return <h3 key={index} className="text-sm font-extrabold text-white pt-2">{paragraph.replace('###', '')}</h3>;
+                      return <h3 key={index} className="text-sm font-extrabold text-foreground pt-2">{paragraph.replace('###', '')}</h3>;
                     }
                     if (paragraph.startsWith('####')) {
-                      return <h4 key={index} className="text-xs font-bold text-white pt-1">{paragraph.replace('####', '')}</h4>;
+                      return <h4 key={index} className="text-xs font-bold text-foreground pt-1">{paragraph.replace('####', '')}</h4>;
                     }
                     if (paragraph.startsWith('-')) {
                       return (

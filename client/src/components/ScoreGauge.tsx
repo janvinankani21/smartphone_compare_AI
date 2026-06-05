@@ -10,9 +10,9 @@ interface ScoreGaugeProps {
 export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, label, size = 'md', type = 'circle' }) => {
   // Determine color theme based on score value
   const getColor = (val: number) => {
-    if (val >= 85) return { stroke: '#10b981', text: 'text-better', bg: 'bg-better/10' }; // green
-    if (val >= 70) return { stroke: '#f59e0b', text: 'text-similar', bg: 'bg-similar/10' }; // yellow
-    return { stroke: '#f43f5e', text: 'text-worse', bg: 'bg-worse/10' }; // red
+    if (val >= 85) return { stroke: '#22C55E', text: 'text-emerald-600', bg: 'bg-emerald-50' }; // green
+    if (val >= 70) return { stroke: '#FFB300', text: 'text-amber-600', bg: 'bg-amber-50' }; // yellow
+    return { stroke: '#EF4444', text: 'text-red-600', bg: 'bg-red-50' }; // red
   };
 
   const colors = getColor(score);
@@ -24,7 +24,7 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, label, size = 'md
           <span className="text-muted-foreground">{label}</span>
           <span className={colors.text}>{score}/100</span>
         </div>
-        <div className="h-2 w-full rounded-full bg-secondary/80 overflow-hidden">
+        <div className="h-2 w-full rounded-full bg-neutral-100 overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-1000`}
             style={{ width: `${score}%`, backgroundColor: colors.stroke }}
@@ -55,7 +55,7 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, label, size = 'md
             cy={dim.sizePx / 2}
             r={dim.radius}
             fill="transparent"
-            stroke="#27272a"
+            stroke="#EAEAEA"
             strokeWidth={dim.strokeWidth}
           />
           {/* Progress circle */}
@@ -72,7 +72,7 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({ score, label, size = 'md
             style={{ transition: 'stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1)' }}
           />
         </svg>
-        <span className={`absolute inset-0 flex items-center justify-center font-bold font-mono text-white ${dim.fontSize}`}>
+        <span className={`absolute inset-0 flex items-center justify-center font-bold font-mono text-foreground ${dim.fontSize}`}>
           {score}
         </span>
       </div>
